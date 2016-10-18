@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>6、JavaScript 运算符</title>
+	<style>
+		th, td {
+			border: 1px solid #666666;
+			padding: 5px 20px;
+		}
+		pre.code {
+			color: #43a9b0;
+			font-size: 16px;
+			font-family: "courier new", sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<h2>算术运算符</h2>
+	<pre>
+		=		赋值运算符
+		+-*/	算术运算符
+		%		求余（取模）
+
+		++		只有变量才能使用。
+				++a:先自加1，再进行其它运算。
+				a++:先进行其它运算，再自加1。
+		--		只有变量才能使用。
+				--a:先自减1，再进行其它运算。
+				a--:先进行其它运算，再自减1。
+
+		+=		a++等同于a+=1，也等同于a=a+1
+				字符串拼接也可以用 +=
+		-=		a--等同于a-=1，也等同于a=a-1
+	</pre>
+
+	<script>
+	var a = 1;
+
+	console.log( a + ++a );// a=2
+	console.log( a + a++ );// a=3
+	console.log( a );
+
+	a += 2;
+	console.log( a );
+
+	a += "5";
+	console.log( a );
+
+	a = a - 5;
+	console.log( a );
+
+	a = "5个王尼玛" - 5;// NaN - 5
+	console.log( a );
+	</script>
+
+	<h2>关系运算符</h2>
+	<pre>
+		== 		- 等于
+		===		- 值和类型都等于
+		!= 		- 不等于
+		!==		- 值和类型都不等于
+
+		<  		- 小于
+		<= 		- 小于或等于
+		>  		- 大于
+		>= 		- 大于或等于
+	</pre>
+
+	<h2>逻辑运算符</h2>
+	<pre>
+		与 		或 		非
+		&&	- 两个条件都成立，结果为 true
+		||	- 两个条件只要有一个成立，则结果为 true
+		! 	- 值取反。true 变成 false。false 变成 true。
+	</pre>
+
+	<h2>运算优先级</h2>
+	<pre>
+		算术运算 > 位运算 > 关系运算 > 逻辑运算
+	</pre>
+
+	<script>
+	var x = 10;
+	var y = 20;
+	var t = x > y || y > x;
+
+	console.log( "x > y || y > x = ", t );
+
+	t = x / 15 + y / 15 > 0;
+	console.log( t );
+	</script>
+
+	<h2>位运算</h2>
+	<pre>
+		>>		右位移
+		<<		左位移
+	</pre>
+	<script>
+	//左乘右除
+	var z = 2;
+	console.log( z << 1 );// 4
+	console.log( 1 + z << 1 );//
+	</script>
+
+	<h2>特殊运算符</h2>
+	<table>
+		<thead>
+		<tr>
+			<th>运算符</th>
+			<th>返回值</th>
+			<th>描述</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>delete</td>
+			<td>true/false</td>
+			<td>
+				从对象中删除一个属性，或者从数组中删除一个元素
+				<pre class="code">
+var obj = {a:1,b:2};
+delete obj.a;
+// 结果：obj == {b:2}
+
+var arr = [1,2,3];
+delete arr[0];
+// 结果：arr == [2,3]
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>typeof</td>
+			<td>string</td>
+			<td>返回参数的数据类型</td>
+		</tr>
+		<tr>
+			<td>void</td>
+			<td>undefined</td>
+			<td>始终返回 undefined</td>
+		</tr>
+		<tr>
+			<td>isNaN</td>
+			<td>true/false</td>
+			<td>
+				检测指变量是否为非数字，即是否为 NaN<br>
+				<pre class="code">
+var a="5王尼玛"-5;
+a == NaN 是错误滴
+要用 isNaN(a) 来检测
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>instanceof</td>
+			<td>true/false</td>
+			<td>
+				检测指定对象是否是特定类的实例
+				<pre class="code">
+var arr = [1,2,3];
+console.log(arr instanceof Array);
+console.log(arr instanceof Object);
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>new</td>
+			<td>object</td>
+			<td>
+				创建一个新的对象实例
+				<pre class="code">
+var obj = {};
+var o2 = new Object();
+				</pre>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<h2>三元运算符（三目运算符）</h2>
+	<pre>
+		?:		三元运算符。
+
+		如：var a = x>5 ? x : 5;
+
+		if(x>5) a = x;
+		else a = 5;
+	</pre>
+
+	<h2>数据转换</h2>
+	<pre>
+		parseInt()		将字符串转换成整数类型
+		parseFloat()	将字符串转换成浮点数（小数）类型
+	</pre>
+	<script>
+	var x = "5a" - 5; // NaN - 5
+
+	console.log( x );
+	console.log( parseInt("5a") - 5 );
+
+	console.log( parseInt("5a") );// 只要有数字开头，转换结果为数值
+	console.log( parseInt("a5") );// 只要非数字开头，转换结果为 NaN
+	</script>
+
+</body>
+</html>

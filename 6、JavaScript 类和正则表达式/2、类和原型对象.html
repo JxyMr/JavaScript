@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、类和原型对象</title>
+</head>
+<body>
+
+	<h2>原型对象 prototype</h2>
+	<pre>
+		JavaScript中对象（null除外），都和另一个对象相关联
+		这个关联的对象就是prototype(原型)，每个（实例）对象都从原型继承“属性”
+	</pre>
+
+	<script>
+	function Person( age )
+	{
+		this.age = age;
+		this.text = function()
+		{
+			console.log( "this..." );
+		};
+
+		// 显示 return 值类型数据无效
+		// 显示 return Object 类型，将导致创建结果为该对象
+		return {
+			a: 10,
+			text: function()
+			{
+				console.log( "new object..." );
+			}
+		};
+	}
+	Person.prototype.name = "pig";
+	Person.prototype.text = function()
+	{
+		console.log( "prototype..." );
+	};
+
+	var p = new Person( 20 );
+	var p1 = new Person( 22 );
+	var p2 = new Person( 21 );
+
+	console.log( p.age );
+	console.log( p1.age );
+	console.log( p2.age );
+
+	p.text();
+
+	// 输出实例
+	console.log( p );
+	</script>
+
+	<pre>
+		类其实也是一个函数，通常称为类的“构造函数”，用于初始化对象，只不过和
+		普通函数相比：
+		* 类名首字母大写
+		* 调用时需要使用 new 关键字创建新对象
+		* 类中的 this 指向类对象本身，和 prototype 是有区别的
+		* this上定义的成员优先级高于 prototype
+
+	</pre>
+
+	<h2>什么是属性和方法</h2>
+	<pre>
+		类中的变量，称为“属性”
+		类中的函数，称为“方法”
+		普通函数中的函数，称为“闭包函数”，作用在于共享该作用域的数据
+	</pre>
+
+</body>
+</html>

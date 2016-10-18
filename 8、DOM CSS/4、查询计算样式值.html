@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、查询计算样式值</title>
+</head>
+<body>
+	<h2>计算样式</h2>
+	<pre>
+		“计算样式”也是通过一个 CSSStyleDeclaration 对象来存储样式值，但
+		与 element.style 不同，它是只读的不能修改。
+
+		即使如此，其实际的样式值，是决定最终渲染时所使用的样式值，具有很高滴
+		价值。
+
+		基本语法
+		----------------------------------------------------
+		[CSSStyleDeclaration] window.getComputedStyle([Element] el,
+			[string, optional] pseudoElt)
+
+		el：需要计算样式的目标元素
+		pseudoElt：需要修饰第一个目标元素的“伪类”，如“:hover，:after，:before”
+
+		浏览器兼容：IE9及以上、Chrome等支持该方法
+	</pre>
+
+	<script>
+	var h2 = document.getElementsByTagName( "h2" )[ 0 ];
+	var style = getRealStyle( h2 );
+	console.log( style.fontSize );
+
+	function getRealStyle( element )
+	{
+		return window.getComputedStyle ?
+				window.getComputedStyle( element ) : element.currentStyle;
+	}
+	</script>
+
+	<h2>currentStyle</h2>
+	<pre>
+		此属性是IE浏览器“自嗨”的一个属性，其与 element.style 使用上很像，
+		但差别在于 element.currentStyle 返回的是元素当前应用的最终CSS属性值。
+		（包括外链CSS，页面中嵌入的style属性等）
+	</pre>
+
+</body>
+</html>

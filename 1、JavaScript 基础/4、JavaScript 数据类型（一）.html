@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、JavaScript 数据类型</title>
+</head>zhangxiongjun@sztrda.com
+<body>
+	<h2>Number - 数值型</h2>
+	<pre>
+		整型（整数） - int（integer）
+		浮点型（小数） - float
+		JavaScript 中所有数值都使用 浮点类型 存储。
+
+		二进制：010 011
+		十进制：10 200 50.2
+		八进制：010 056 007
+		十六进制：0xf 0x02 0xff
+		RGB #FFFFFF rgb(255,255,255)
+	</pre>
+
+	<h2>String - 字符串类型</h2>
+	<pre>
+		用单引号或者双引号包含的任意文本内容，称为“字符串”。
+		字符串的起始符：起始、结束都是对应的相同的引号。
+	</pre>
+	<script>
+	var a = "big";
+	var b = 'small';
+	var c = " and ";
+	var str = "this is a string!";
+	var single = 'var a=\'' + a + '\';';
+	var dbl = "var b=\"" + _b + "\";";
+
+	// 如何拼接字符串
+	console.log( a, _b );
+	console.log( str );
+
+	// big and small
+	console.log( a + c + _b );
+
+	// 如何把变量代入字符串的指定位置
+	// 双引号中若需要再加入双引号，则需要将其用 \ 转义成普通字符，不被当成字符串的结束符号
+	console.log( single );
+	console.log( dbl );
+
+	// 字符串中的换行
+	console.log( "i'm \nnot ok!" );
+	//alert( "i'm \nnot ok!" );
+
+	</script>
+
+	<h2>Boolean - 布尔类型</h2>
+	<pre>
+		布尔类型数据只能是 true 和 false 其一，代表“真的”和“假的”。
+		布尔类型常用来作条件判断。
+
+		0、undefined、null、NaN、""都被认为是 false。
+
+		NaN - not a number
+	</pre>
+	<script>
+	var t = true;
+	var f = false;
+
+	// if(条件表达式){}else{}
+
+	//if( 1 + 1 == 3 )// 如果条件成立，执行之后的代码
+	if( undefined )
+	{
+		//...此处省略一万行代码
+		console.log( "这是蒸的" );
+	}
+	else// 否则条件不成立执行此代码
+	{
+		//...此处省略一万行代码
+		console.log( "这是假的" );
+	}
+
+	if( a = 5 )
+	{
+		a = 10;
+	}
+	console.log( a );
+	</script>
+
+</body>
+</html>

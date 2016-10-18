@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、函数</title>
+</head>
+<body>
+	<h2>函数定义</h2>
+	<pre>
+		函数是由事件驱动或者当其被调用时，执行的重复使用的代码块。
+
+		函数使用 function 关键字声明，声明后不会立即执行，会在
+		我们需要的时候调用到。
+	</pre>
+	<script>
+	// 实名函数：不论在何处声明，都会在其它代码执行前，被提升到
+	// 当前作用域的最顶端（准备好被调用）
+	function func()
+	{
+		console.log( "func1..." );
+	}
+
+	// 匿名函数（函数表达式）：实际上是一个变量，在声明之前无法调用。
+	var func2 = function()
+	{
+	};
+	</script>
+
+	<h2>自调用函数（面试题）</h2>
+	<pre>
+		函数表达式可以“自调用”，如果函数表达式后面紧跟 ()，则会自动调用。
+	</pre>
+	<script>
+	var fn = (function()
+	{
+		//-----------------------------------------------
+		// 闭包函数：函数中的函数，其目的在于共享该作用域的数据，
+		// 以及防止命名冲突
+		// 这种方式被称之为“预防全局空间污染”
+		return function func()
+		{
+			console.log( "func2..." );
+		};
+
+		//-----------------------------------------------
+	})();
+
+	func();
+	fn();
+	</script>
+
+	<h2>递归函数</h2>
+	<pre>
+		函数调用自身的编程技巧称为递归（recursion）。
+
+		递归函数的要求：
+		1、必须有出口和入口，若没有出口，即变成死循环
+		2、出口一般使用条件进行分支
+	</pre>
+	<script>
+	var obj = {
+		a: { x: 1, y: 2 },
+		b: 20,
+		c: {
+			m: 1, n: {
+				n1: 30,
+				n2: {
+					n22: 20, n23: {
+						n231: 100
+					}
+				}
+			}
+		}
+	};
+
+	function rec( obj, sp )
+	{
+		for( var ns in obj )
+		{
+			var v = obj[ ns ];
+			if( typeof(v) == "object" )
+			{
+				console.log( sp + ns, ":" );
+				rec( v, sp + "\t" );
+			}
+			else
+			{
+				console.log( sp + ns, ":", v );
+			}
+		}
+	}
+	rec( obj, "" );
+	</script>
+
+	<h2>变量提升（面试题）</h2>
+	<script>
+	// 允许 变量未定义的情况下，直接使用
+	// var up;
+
+	// 允许在变量声明之前提前使用
+	console.log( up );
+
+	// 定义变量会被拆分：
+	// 声明部分被会提升到当前作用域的最顶端
+	// 赋值部分保持原位
+	var up = 10;// up=10;
+
+	function fule()
+	{
+		// var up;
+		console.log( "fule:", up, up() );
+
+		// var up = 20;
+		//	var up = function()
+		//	{
+		//	};
+		function up()
+		{
+		}
+	}
+	fule();
+	</script>
+
+</body>
+</html>

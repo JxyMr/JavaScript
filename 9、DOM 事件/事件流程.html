@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件流程</title>
+
+	<style>
+		* { padding: 20px 50px; }
+		div { background-color: #6eb8db; }
+		ul { background-color: #83d5d5; }
+		li { background-color: #58d9e0; }
+		h3 { background-color: #69b864; }
+		p { background-color: #a6dd9e; }
+	</style>
+
+</head>
+<body>
+	<div>
+		<ul>
+			<li>
+				<h3>标题一</h3>
+				<p>雄伟滴岳麓山。。。</p>
+			</li>
+			<li>
+				<h3>标题二</h3>
+				<p>天上滴太阳啊。。。</p>
+			</li>
+			<li>
+				<h3>标题三</h3>
+				<p>你很大巴大。。。</p>
+			</li>
+		</ul>
+	</div>
+
+	<script>
+	var p = document.getElementsByTagName( "li" )[ 1 ];
+	p.addEventListener( "mouseover", clickHandler, true );
+
+	function clickHandler( event )
+	{
+		console.log( event.target );
+	}
+	</script>
+</body>
+</html>

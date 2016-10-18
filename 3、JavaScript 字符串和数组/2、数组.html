@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、数组</title>
+</head>
+<body>
+	<h2>数组概述</h2>
+	<pre>
+		Array 是用变量存储多个值的容器，每个值称为数组的“元素”，
+		这些值的数据类型可以不相同。
+	</pre>
+
+	<h2>创建数组</h2>
+	<script>
+	var a1 = [ 1, 2, 3, "Sab" ];// 推荐使用
+	var a2 = new Array( 1, 2, 3, "Sab" );
+	var a3 = new Array();// []
+	a3[ 0 ] = 1;
+	a3[ 1 ] = 2;
+	//a3[ 2 ] = 3;
+	a3[ 5 ] = "Sab";
+	// 若跳过连续下标，直接设置，会自动补全空元素
+
+	console.log( a1, a1.length );
+	console.log( a2, a2.length );
+	console.log( a3, a3.length );
+	</script>
+
+	<h2>合并多个数组</h2>
+	<script>
+	// concat 不会修改原数组，而是返回新的副本数组
+	var x = [ 4, 5, 6 ];
+	var y = [ 1, 2, 3 ];
+	var z = x.concat( y );
+	console.log( x );
+	console.log( z );
+	</script>
+
+	<h2>搜索是否包含指定元素值</h2>
+	<script>
+	// indexOf
+
+	// 若查找的元素值不存在，则返回 -1，否则返回第一个出现位置的下标
+	console.log( z.indexOf( 5 ) );
+
+	if( z.indexOf( 5 ) != -1 )
+	{
+		console.log( "存在！" );
+	}
+	else
+	{
+		console.log( "没有！" );
+	}
+	</script>
+
+	<h2>添加元素</h2>
+	<script>
+	// 向指定数组追加一个或者多个元素
+	z.push( 7, 8, "9" );
+	console.log( z );
+	</script>
+
+	<h2>删除元素</h2>
+	<script>
+	// 删除数组元素会直接修改原数组，数组长度会发生变化
+
+	// 删除第一个元素，并且返回这个元素
+	var n1 = z.shift();
+	console.log( n1, z.toString() );
+
+	// 删除并返回最后一个元素
+	var n2 = z.pop();
+	console.log( n2, z.toString() );
+
+	// splice(查找位置，删除个数)
+	z.splice( 0, 1 );
+	console.log( z.toString(), z.length );
+	</script>
+
+	<h2>复制元素返回新数组副本</h2>
+	<pre>
+		splice
+		slice(start, end)
+		从指定数组中抽取 start 到 end 区间的元素，组成新数组并返回
+	</pre>
+	<script>
+	console.log( z.slice( 1, 4 ) );
+	var w = z.slice();// 完全复制目标数组的副本，目的在于不修改原数组
+	w.push( 100 );
+	console.log( z, w );
+	</script>
+
+	<h2>数组排序</h2>
+	<pre>
+		Array.sort(排序函数)
+	</pre>
+	<script>
+	var u = [ 1, 6, 8, 5, 23, 0, 12 ];
+	// 0,1,5,6,8,12,23
+
+	u.sort( function( a, b )
+	{
+		// -1 把a,b之间大的数值前移
+		// 0  把a,b保持原位
+		// 1  把a,b之间大的数值推后
+
+		//		if( a > b ) return -1;
+		//		else if( a == b ) return 0;
+		//		else return 1;
+		return _b - a;
+	} );
+
+	console.log( u );
+
+	var names = [ "张Abbliy", "王Shit", "李Back", "赵Fuck", "喵Mother" ];
+	names.sort( function( a, b )
+	{
+		return a.charCodeAt( 0 ) - _b.charCodeAt( 0 );
+	} );
+
+	console.log( names );
+	</script>
+
+</body>
+</html>

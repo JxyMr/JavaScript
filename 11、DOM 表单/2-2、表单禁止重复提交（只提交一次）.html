@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2-2、表单禁止重复提交</title>
+</head>
+<body>
+	<form id="formRegister" action="http://www.baidu.com" method="post"
+		  onsubmit="submitHandler(event)">
+		<input type="text" id="txtUserName" name="txtUserName" placeholder="用户名" readonly>
+		<input type="password" id="txtPassWord" name="txtPassWord" placeholder="密码" disabled>
+
+		<button id="btnSubmit">立即提交</button>
+	</form>
+
+	<script>
+	var btnSubmit = document.getElementById( "btnSubmit" );
+
+	function submitHandler( event )
+	{
+		// 兼容方式获取事件对象
+		event = event || window.event;
+
+		// 兼容方式阻止表单提交这个默认行为
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+
+		// 其它表单数据处理逻辑
+		//--------------------------------------------------
+		console.log( event );
+		btnSubmit.setAttribute( "disabled", "true" );
+
+		setTimeout( function()
+		{
+			//骚年啊。这样要不得啊
+			//btnSubmit.setAttribute( "disabled", "false" );
+
+			//正确的路在何方，在这个下面
+			btnSubmit.removeAttribute( "disabled" );
+		}, 1000 );
+	}
+	</script>
+
+</body>
+</html>

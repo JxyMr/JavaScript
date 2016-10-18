@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、绘制</title>
+</head>
+<body>
+	<h2>填充和描边样式</h2>
+	<pre>
+		context.fillStyle  设置填充样式
+		context.strokeStyle  设置描边样式
+
+		填充和描边样式可设置为：
+		* 字符串：颜色名（red、blue）、十六进制颜色（#333）、rgb/rgba
+		* 渐变对象（多种颜色构成的特殊Object）
+		* 模式对象（重复的图像，类似于PS的图章）
+
+		描边属性：
+		除了用strokeStyle设置线条颜色外，还可以设置线条大小、末端样式、相交方式
+		lineWidth 		线条大小（数值，不需要单位px）
+		lineGap 		线条末端样式（平头butt、圆头round、方头square）
+		lineJoin 		线条相交样式（圆交round、斜交bevel、斜接miter）
+	</pre>
+
+	<h2>绘制矩形</h2>
+	<pre>
+		fillRect()		填充矩形
+		strokeRect()	描边矩形
+		clearRect()		清除矩形区域内所有的像素
+	</pre>
+
+	<h2>绘制路径</h2>
+	<pre>
+		点 		画布中的坐标点
+		线段 	两个坐标点连接的直线（弧线）
+		路径 	多个线段连接后的集合称为路径，路径中的线段也称为“子路径”
+
+		beginPath()		开始定义一条新的路径
+		moveTo() 		移到新的绘制起始点
+		lineTo()		从当前点向目标点绘制直线
+		closePath()		结束一条路径（也能起到自动闭合路径的目的）
+
+		以上方法只是定义路径，并未实际进行绘制。
+		需要对路径进行填充或者描边才能看见它的存在。
+
+		使用 fillStyle()预定义填充样式，和合适的位置调用fill()对路径进行填充。
+		使用 strokeStyle()预定义描边样式，在合适的位置调用 stroke() 进行描边。
+	</pre>
+
+	<h2>圆和圆弧</h2>
+	<pre>
+		context.arc(x,y,radius)
+
+		context.arc(x,y,radius,startAngle,endAngle,anticlockwise)
+
+		radius 		半径
+		startAngle,endAngle  开始角度和结束角度（弧度表示，PI表示并个圆）
+		anticlockwise 	是否角度按逆时针方向计算，false 表示顺时针
+
+
+		context.arcTo(x1,y1,x2,y2,radius)
+		绘制弧线以x1,y1为控制点，从当前点到x2,y2绘制弧线
+	</pre>
+
+	<h2>绘制文字</h2>
+	<pre>
+		绘制文本使用fillText()和strokeText()方法。
+
+		基本语法：fillText(text,x,y,maxWidth)
+		text 	要绘制文本字符串
+		x,y 	绘制的目标起点
+		maxWidth 对文字内容宽度进行限制，若文本总宽超出该值则会出现被“挤扁”的效果
+
+		文本属性
+		------------------------------------------
+		文本样式：context.font，如“bold 12px Arial”
+		对齐方式：context.textAlign，主要有 start end left right center
+		文本基线：context.textBaseline，主要有 top hanging middle alphabetic
+				ideogaphic bottom
+
+		测量文本
+		------------------------------------------
+		context.measureText(text)
+		返回测量对象，包含测量数据信息，包括文本总宽高属性
+	</pre>
+
+	<h2>绘制图像</h2>
+	<pre>
+		Canvas使用context.drawImage()方法将图像绘制到画布的指定位置
+
+		在画布指定位置绘制完整图像：
+		---------------------------------------------
+		context.drawImage(img,x,y)
+
+		img 		绘制的来源，可以是img元素、canvas元素、video元素、图像数据
+		x,y 		绘制的目标位置
+
+
+		在画布指定位置绘制图像，并且缩放在指定的宽度：
+		---------------------------------------------
+		context.drawImage(img,x,y,width,height)
+		width，height 将使绘制结果进行缩放后绘制
+
+
+		剪切图像来源，并在指定位置绘制剪切后的图像：
+		---------------------------------------------
+		context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height)
+
+		sx,sy 		指源图像上的坐标点
+		swidth 		source width，从来源图像裁剪区域的宽度
+		sheight 	source height，从来源图像裁剪区域的高度
+
+	</pre>
+
+	<h2>坐标系变换</h2>
+	<pre>
+		2D上下文对象支持的变换：
+		translate(x,y)		将原点平移到指定位置（即重新映射画布的(0,0)点）
+		rotate(angle) 		围绕原点旋转绘制结果（单位弧度，正数顺时针，负数逆针时）
+		scale(scaleX,scaleY) 缩放当前绘制结果，直接影响之后绘制的缩放比例，默认1.0
+
+		注意：以上变换只会影响变换后的结果，不影响之前的绘制过的结果，这点和CSS3的变换
+		有本质区别。
+	</pre>
+
+	<h2>保存和恢复状态</h2>
+	<pre>
+		context.save()		保存当前所有状态，缓存起来，以便于恢复
+		context.restore()	恢复到上一次保存的状态进行绘制
+
+		注意：以上方法只保存状态和样式设置，并不对绘制结果进行保存。
+	</pre>
+
+	<h2>动画</h2>
+	<pre>
+		基本原理：定时清除画布内容，然后重新绘制新的动画内容。
+
+		实现步骤：
+		1、清除：clearRect() 清除矩形区域内的所有像素内容
+		2、重绘：如 fillRect() 重绘矩形区域到新的位置
+		3、驱动：使用计时器进行重复执行绘制逻辑
+	</pre>
+
+
+
+</body>
+</html>

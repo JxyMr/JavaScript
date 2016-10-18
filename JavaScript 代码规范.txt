@@ -1,0 +1,52 @@
+
+语句规范
+	* 语句：以分号结束
+	* 声明：每行只写一个声明，并且尽量赋初值
+	* 变量：全小写，使用英文单词，第一个单词小写，后续单词首字母大写。“驼峰法”命名
+	* 常量：全大写，使用英文单词，单词之间用下划线连接。
+		const PI = 3.14;
+		const MATH_DATA = 10;
+
+	初值：
+	空对象及其它对象赋值 null
+	空字符串	= ""
+	空数组	= []
+	数值		= 0，-1
+	布尔值	= false
+
+函数和类规范
+	* 函数名：全小写，要求使用英文单词，尽量不简写，词意清晰，以驼峰法命名
+
+	* 类私有属性：以下划线开始，后以驼峰法命名。如：var _userName = "";
+	* 类私有方法：与私有属性规则相同。如 function _findWord(){};
+
+	* 类公有属性和方法：直接以驼峰法命名。如 this.findWord = function(){};
+
+	* 类名：首字母大写，后续使用驼峰法命名。如 class FindWordModule()
+
+	* 事件回调函数：命名规则和私有及公有相同，但是在函数名后加上“Handler”用以
+		标识其为事件回调函数。
+
+HTML命名规范
+	HTML 中的 ID：
+	* 按钮以 btn 开头，如 btnEnter
+	* 标签以 lbl 开头，如 lblName
+	* 复选框以 chk 开头，如 chkSex
+	* 单选框以 rad 开头，如 radSex
+	* 下拉框以 sel 开头，如 selCity
+	* 文本输入框（包含密码框）、文本域都以 txt 开头，如 txtUserName
+	* 表单以 form 开头，如 formRegister
+	* 框架（iframe）以 frm 开头
+
+	自定义模块和类中的HTML的ID：
+	为了不与使用环境页面产生命名冲突，以 “双下划线” 开头，后接全写小的模块名称或者
+	类名，再根据以上的规则命名。
+	如定义了 Msg 类，则按钮的ID命名为 __msgBtnEnter
+
+
+文件命名规范
+	JavaScript 文件名：全小写（包括后缀名 .js），以 . 或者下划线分隔单词
+	类文件：msg.class.js		msg_class.js
+	库文件：math.lib.js		math_lib.js
+	函数集：common.func.js	common_func.js
+	其它：menu.js

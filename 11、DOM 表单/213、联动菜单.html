@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>联动菜单</title>
+</head>
+<body>
+	<form action="">
+		<select name="province" id="province" onchange="cityHandler(event)"></select>
+		<select name="city" id="city"></select>
+	</form>
+
+	<script>
+	var _WHERE = {};
+
+	_WHERE[ "北京:bj" ] = "东城:dc|西城:xc|崇文:cw|宣武:xw|朝阳:zy|丰台:ft|石景山:sjs|海淀:hd|门头沟:mtg|房山:fs|通州:tz|顺义:sy|昌平:cp|大兴:dx|平谷:pg|怀柔:hr|密云:my|延庆:yq";
+	_WHERE[ "上海:sh" ] = "黄浦:hp|卢湾:lw|徐汇:xh|长宁:cn|静安:ja|普陀:pt|闸北:zb|虹口:hk|杨浦:yp|闵行:mx|宝山:bs|嘉定:jd|浦东:pd|金山:js|松江:sj|青浦:qp|南汇:nh|奉贤:fx|崇明:cm";
+	_WHERE[ "天津:tj" ] = "和平:hp|东丽:dl|河东:hd|西青:xq|河西:hx|津南:jn|南开:nk|北辰:bc|河北:hb|武清:wq|红挢:hq|塘沽:tg|汉沽:hg|大港:dg|宁河:nh|静海:jh|宝坻:bd|蓟县:sx";
+	_WHERE[ "重庆:cq" ] = "万州:wz|涪陵:pl|渝中:yz|大渡口:ddk|江北:jb|沙坪坝:spb|九龙坡:jlp|南岸:na|北碚:bb|万盛:ws|双挢:sj|渝北:yb|巴南:bn|黔江:qj|长寿:cs|綦江:qj|潼南:tn|铜梁:tl|大足:dz|荣昌:rc|壁山:bs|梁平:lp|城口:ck|丰都:fd|垫江:dj|武隆:wl|忠县:zx|开县:kx|云阳:yy|奉节:fj|巫山:ws|巫溪:wx|石柱:sz|秀山:xs|酉阳:yy|彭水:ps|江津:jj|合川:hc|永川:yc|南川:nc";
+	_WHERE[ "河北:hb" ] = "石家庄:sjz|邯郸:hd|邢台:xt|保定:bd|张家口:zjk|承德:cd|廊坊:lf|唐山:ts|秦皇岛:qhd|沧州:cz|衡水:hs";
+	_WHERE[ "山西:sx" ] = "太原:ty|大同:dt|阳泉:yq|长治:cz|晋城:jc|朔州:sz|吕梁:ll|忻州:xz|晋中:jz|临汾:lf|运城:yc";
+	_WHERE[ "内蒙古:nmg" ] = "呼和浩特:hhht|包头:bt|乌海:wh|赤峰:cf|呼伦贝尔盟:hlbem|阿拉善盟:alsm|哲里木盟:zlmm|兴安盟:xam|乌兰察布盟:wlcbm|锡林郭勒盟:xlglm|巴彦淖尔盟:bynem|伊克昭盟:ykzm|鄂尔多斯:eeds";
+	_WHERE[ "辽宁:ln" ] = "沈阳:sy|大连:dl|鞍山:as|抚顺:fs|本溪:bx|丹东:dd|锦州:jz|营口:yk|阜新:fx|辽阳:ly|盘锦:pj|铁岭:tl|朝阳:zy|葫芦岛:hld";
+	_WHERE[ "吉林:jl" ] = "长春:cc|吉林:jl|四平:sp|辽源:ly|通化:th|白山:bs|松原:sy|白城:bc|延边:yb";
+	_WHERE[ "黑龙江:hlj" ] = "哈尔滨:heb|齐齐哈尔:qqhe|牡丹江:mdj|佳木斯:jms|大庆:dq|绥化:sh|鹤岗:hg|鸡西:jx|黑河:hh|双鸭山:sys|伊春:yc|七台河:qth|大兴安岭:dxal";
+	_WHERE[ "江苏:js" ] = "南京:nj|镇江:zj|苏州:sz|南通:nt|扬州:yz|盐城:yc|徐州:xz|连云港:lyg|常州:cz|无锡:wx|宿迁:sq|泰州:tz|淮安:ha";
+	_WHERE[ "浙江:zj" ] = "杭州:hz|宁波:nb|温州:wz|嘉兴:jx|湖州:hz|绍兴:sx|金华:jh|衢州:qz|舟山:zs|台州:tz|丽水:ls";
+	_WHERE[ "安徽:ah" ] = "合肥:hf|芜湖:wh|蚌埠:bb|马鞍山:mas|淮北:hb|铜陵:tl|安庆:aq|黄山:hs|滁州:cz|宿州:sz|池州:cz|淮南:hn|巢湖:ch|阜阳:fy|六安:la|宣城:xc|亳州:hz";
+	_WHERE[ "福建:fj" ] = "福州:fz|厦门:xm|莆田:pt|三明:sm|泉州:qz|漳州:zz|南平:np|龙岩:ly|宁德:ld";
+	_WHERE[ "江西:jx" ] = "南昌市:ncs|景德镇:jdz|九江:jj|鹰潭:yt|萍乡:px|新馀:xy|赣州:gz|吉安:ja|宜春:yc|抚州:fz|上饶:sr";
+	_WHERE[ "山东:sd" ] = "济南:jn|青岛:qd|淄博:zb|枣庄:zz|东营:dy|烟台:yt|潍坊:wf|济宁:jn|泰安:ta|威海:wh|日照:rz|莱芜:lw|临沂:lx|德州:dz|聊城:lc|滨州:bz|菏泽:hz";
+	_WHERE[ "河南:hn" ] = "郑州:zz|开封:kf|洛阳:ly|平顶山:pds|安阳:ay|鹤壁:hb|新乡:xx|焦作:jz|濮阳:py|许昌:xc|漯河:lh|三门峡:smx|南阳:ny|商丘:sq|信阳:xy|周口:zk|驻马店:zmd|济源:jy";
+	_WHERE[ "湖北:hb" ] = "武汉:wh|宜昌:yc|荆州:jz|襄樊:xf|黄石:hs|荆门:jm|黄冈:hg|十堰:sy|恩施:es|潜江:qj|天门:tm|仙桃:xt|随州:sz|咸宁:xn|孝感:xg|鄂州:ez";
+	_WHERE[ "湖南:hn" ] = "长沙:cs|常德:cd|株洲:zz|湘潭:xt|衡阳:hy|岳阳:yy|邵阳:sy|益阳:yy|娄底:ld|怀化:hh|郴州:cz|永州:yz|湘西:xx|张家界:zjj";
+	_WHERE[ "广东:gd" ] = "广州:gz|深圳:sz|珠海:zh|汕头:st|东莞:dg|中山:zs|佛山:fs|韶关:sg|江门:jm|湛江:zj|茂名:mm|肇庆:zq|惠州:hz|梅州:mz|汕尾:sw|河源:hy|阳江:yj|清远:qy|潮州:cz|揭阳:jy|云浮:yf";
+	_WHERE[ "广西:gx" ] = "南宁:nn|柳州:lz|桂林:gl|梧州:wz|北海:bh|防城港:fcg|钦州:qz|贵港:gg|玉林:yl|南宁地区:nndq|柳州地区:lzdq|贺州:hz|百色:bs|河池:hc|来宾:lb";
+	_WHERE[ "海南:hn" ] = "海口:hk|三亚:sy";
+	_WHERE[ "四川:sc" ] = "成都:cd|绵阳:my|德阳:dy|自贡:zg|攀枝花:pzh|广元:gy|内江:nj|乐山:ls|南充:nc|宜宾:yb|广安:ga|达川:dc|雅安:ya|眉山:ms|甘孜:gz|凉山:ls|泸州:lz";
+	_WHERE[ "贵州:gz" ] = "贵阳:gy|六盘水:lps|遵义:zy|安顺:as|铜仁:tr|黔西南:qxn|毕节:bj|黔东南:qdn|黔南:qn";
+	_WHERE[ "云南:yn" ] = "昆明:km|大理:dl|曲靖:qj|玉溪:yx|昭通:zt|楚雄:cx|红河:hh|文山:ws|思茅:sm|西双版纳:xsbn|保山:bs|德宏:dh|丽江:lj|怒江:nj|迪庆:dq|临沧:lc";
+	_WHERE[ "西藏:xz" ] = "拉萨:ls|日喀则:rkz|山南:sn|林芝:lz|昌都:cd|阿里:al|那曲:nq";
+	_WHERE[ "陕西:sx" ] = "西安:xa|宝鸡:bj|咸阳:xy|铜川:tc|渭南:wn|延安:ya|榆林:yl|汉中:hz|安康:ak|商洛:sl";
+	_WHERE[ "甘肃:gs" ] = "兰州:lz|嘉峪关:jyg|金昌:jc|白银:by|天水:ts|酒泉:jq|张掖:zy|武威:ww|定西:dx|陇南:ln|平凉:pl|庆阳:qy|临夏:lx|甘南:gn";
+	_WHERE[ "宁夏:nx" ] = "银川:yc|石嘴山:szs|吴忠:wz|固原:gy";
+	_WHERE[ "青海:qh" ] = "西宁:xn|海东:hd|海南:hn|海北:hb|黄南:hn|玉树:ys|果洛:gn|海西:hx";
+	_WHERE[ "新疆:xj" ] = "乌鲁木齐:wlmq|石河子:shz|克拉玛依:klmy|伊犁:yl|巴音郭勒:bygl|昌吉:cj|克孜勒苏柯尔克孜:kzlskekz|博尔塔拉:betl|吐鲁番:tlf|哈密:hm|喀什:ks|和田:ht|阿克苏:aks";
+
+	var province = document.getElementById( "province" );
+	var city = document.getElementById( "city" );
+
+	function createOption( text, value )
+	{
+		return new Option( text, value );
+	}
+
+	//----------------------------------------------------
+	// 设置下拉列表的初始数据
+	(function( data )
+	{
+		// 初始列表
+		// 如何获取省级列表数据
+		var provinceDatas = [];
+
+		for( var ns in data )
+		{
+			provinceDatas.push( ns );
+		}
+
+		// 设置列表数据
+		setDataList( province, provinceDatas );
+
+		// 设置市级列表
+		var citys = getCityDatas( provinceDatas[ 0 ] );
+
+		// 乌鲁木齐:wlmq
+		setDataList( city, citys );
+
+	})( _WHERE );
+
+	function setDataList( target, datas )
+	{
+		target.options.length = 0;
+
+		for( var i = 0; i < datas.length; i++ )
+		{
+			// "新疆:xj"
+			var p = datas[ i ].split( ":" );
+			var opt = new Option( p[ 0 ], p[ 1 ] );
+			target.appendChild( opt );
+		}
+	}
+
+	/**
+	 * 获取省级列表数据
+	 * @param province 省属性名
+	 * @return {Array} 市级列表数据
+	 */
+	function getCityDatas( province )
+	{
+		return _WHERE[ province ].split( "|" );
+	}
+
+	//----------------------------------------------------
+	// 切换省级列表，自动更新市级列表
+
+	function cityHandler( event )
+	{
+		event = event || window.event;
+		var select = event.currentTarget || event.srcElement;
+
+		// 当前选中的 option
+		// select.selectedIndex：当前选中 option 的索引
+		var opt = select.options[ select.selectedIndex ];
+
+		// 还原列表相同结构的属性名
+		var val = opt.text + ":" + select.value;
+
+		// 设置市级列表
+		var citys = getCityDatas( val );
+
+		// 乌鲁木齐:wlmq
+		setDataList( city, citys );
+	}
+	</script>
+</body>
+</html>

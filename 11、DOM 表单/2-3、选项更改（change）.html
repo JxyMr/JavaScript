@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2-3、选项更改（change）</title>
+</head>
+<body>
+	<form id="formRegister" action="http://www.baidu.com" method="post">
+
+		<input type="text" id="txtUserName" name="txtUserName" placeholder="用户名" onchange="changeHandler(event)">
+		<textarea name="txtDesc" id="txtDesc" cols="30" rows="5" onchange="changeHandler(event)"></textarea>
+		<select name="selHobby" id="selHobby" onchange="changeHandler(event)">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+
+		<button id="btnSubmit">立即提交</button>
+	</form>
+
+	<script>
+	var btnSubmit = document.getElementById( "btnSubmit" );
+
+	function changeHandler( event )
+	{
+		event = event || window.event;
+		var target = event.currentTarget || event.srcElement;
+		// event.currentTarget - 始终指向添加事件监听的元素
+		// event.target - 当前派发事件的来源元素
+
+		console.log( target.value );
+	}
+	</script>
+
+</body>
+</html>

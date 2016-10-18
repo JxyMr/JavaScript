@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、函数参数</title>
+</head>
+<body>
+	<h1>
+		JavaScript函数对参数的值没有任何检查，既不对数据类型，也不对参数个数
+		进行检测。
+	</h1>
+
+	<h2>形参和实参</h2>
+	<pre>
+		形参：声明函数时所使用形式参数，仅仅代表一个尚不存在的数据。
+		实参：调用函数时所传递给函数的实际参数值。
+	</pre>
+
+	<h2>函数的参数类型</h2>
+	<pre>
+		分为显式参数，和隐式参数。
+		显示参数在函数声明时给出，隐式参数在函数调用时给出。
+	</pre>
+	<script>
+	function func( a, b )
+	{
+		var sum = 0;
+
+		for( var i = 0; i < arguments.length; i++ )
+		{
+			sum += arguments[ i ];
+		}
+
+		return sum;
+	}
+
+	function max( a, b )
+	{
+		var mx = 0;
+
+		for( var i = 0; i < arguments.length; i++ )
+		{
+			if( mx < arguments[ i ] )
+				mx = arguments[ i ];
+		}
+
+		return mx;
+	}
+
+	func( 1, 2, 3, 4, 5 );
+
+	console.log( max( 2 ), Math.max( 2 ) );
+	</script>
+
+	<h2>额外的参数</h2>
+	<pre>
+		多个参数，合称“参数列表”。
+		参数列表以数组的形式提供，在函数内部使用 arguments 来获取。
+		arguments 代表调用函数时所传入的所有参数。
+	</pre>
+
+	<h2>参数的传递</h2>
+	<pre>
+		值类型和引用类型数据传递和更改。
+	</pre>
+
+	<script>
+	function change( target )
+	{
+		if( typeof (target) == "object" )
+		{
+			if( target instanceof Array )
+			{
+				target.pop();
+			}
+			else
+			{
+				target.new = "new value";
+			}
+		}
+		else
+		{
+			target = 20;
+			console.log( "change:", target );
+		}
+	}
+
+	var a = 10;
+	change( a );
+	console.log( a );
+
+	var b = { a: 1, b: 2 };
+	change( _b );
+	console.log( _b );
+
+	var c = [ 1, 2, 3 ];
+	change( c );
+	console.log( c );
+	</script>
+
+</body>
+</html>

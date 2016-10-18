@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、正则表达式</title>
+</head>
+<body>
+	<h2>正则的重要性</h2>
+	<pre>
+		数据+代码
+		模糊查询、或者替换
+
+		如window文件搜索中，*和?起到模糊查询的目的，它们有个名称叫“通配符”
+
+		aosnow@yeah.net @.
+
+		action server page = asp
+
+	</pre>
+
+	<div>
+		留言内容
+	</div>
+	<div style="height:10000px;">
+	</div>
+
+	<textarea>
+		MS SQLSEVER
+		INSERT TO table SET(content) VALUE('+content+')
+	</textarea>
+
+	<h2>正则表达式</h2>
+	<pre>
+		JavaScript中正则表达式对象名称为 RegExp，即“有规则的表达式”
+
+		比如：/[a-z]+/
+		以 a-z 之间的字母重复1次或者多次的字符串
+		abcdefg   good   hello  abcd123
+
+		/[a-z0-9]+/
+		匹配任何以数字、小写字母为组合的字符串
+
+		"Hello W!".replace("W","World")
+		"Hello World!"
+
+		正则表达式，就是通过一系列规则的标识符来描述一段有规律的字符串的表达式。
+		而这些标识符，我们称之为“模式”
+	</pre>
+
+	<h2>创建正则表达式</h2>
+	<pre>
+		字面量直接创建
+		/[a-z]/ig
+		一定记住，没有引号，它是一种字面量表达式，而不是“字符串”
+
+		构造函数创建
+		var reg = new RegExp("[a-z]", "ig");
+		通过对象参数的形式来构建，有引号，字符串形式
+		好处在于，能够在表达式中插入其它变量内容
+
+		var start = "c";
+		var end = "f";
+
+		new RegExp("["+start+"-"+end+"]", "ig");
+	</pre>
+
+	<h2>正则表达式应用场景</h2>
+	<script>
+	// 1、字符串内容格式测试：test
+	console.log( /^\d+$/.test( "27435628" ) );
+	// digit 检测目标字符串是否为全数字
+	// 返回布尔值，若检测通过返回 true，否则返回 false
+
+	// 2、替换和过滤字符串：replace
+	var s = "Hello W! W is beatuful!".replace( /w/ig, "World" );
+	console.log( s );
+
+	// 3、子字符串抽取
+	var tag = "<span style='color:#000;'>".replace( /<(\w+)[^>]+>/, "$1" );
+	console.log( tag );
+
+	// 4、字符串分解成数组
+	var a = "red{1}green{2}blue".split( /\{\d\}/ );
+	console.log( a );
+
+	// 5、字符串匹配查询
+	var m = "red green blue. i'm so hungry.".match( /\w+/g );
+	console.log( m );
+	</script>
+
+</body>
+</html>

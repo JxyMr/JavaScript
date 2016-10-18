@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习题</title>
+	<style>
+		.white {
+			color: #ffffff;
+		}
+		.black {
+			color: #333333;
+		}
+	</style>
+</head>
+<body>
+	<script>
+	// 1、计算1~100内所有偶数的和
+	var sum = 0;
+	for( var i = 0; i < 101; i += 2 )
+	{
+		sum += i;
+	}
+	console.log( sum );
+
+	// 2、输出 * 号组成 5行5列 的三角形到网页：◤◣◥◢
+	for( var i = 0; i < 6; i++ )
+	{
+		for( var j = 0; j < i; j++ )
+		{
+			document.write( "*" );
+		}
+		document.write( "*" + "<br>" );
+	}
+
+	document.write( "<br>" );
+
+	for( var i = 6; i > 0; i-- )
+	{
+		for( var j = 0; j < i - 1; j++ )
+		{
+			document.write( "*" );
+		}
+		document.write( "*" + "<br>" );
+	}
+
+	document.write( "<br>" );
+
+	// 3、输出九九乘法表
+
+	for( var i = 0; i <= 9; i++ )
+	{
+		for( var j = 1; j <= i; j++ )
+		{
+			document.write( i + "*" + j + "=" + i * j + "\n" );
+		}
+		document.write( "<br>" );
+	}
+
+	// 4、输出 * 号组成 9行9列 的菱形到网页：◆ `
+	for( i = 1; i <= 9; i++ )
+	{
+		// 5,6,7,8
+		var a = Math.abs( 5 - i );
+		var b = 9 - a;
+
+		console.log( a, _b );
+		// 0,1,2,3,4,  5,6,7,8
+		for( j = 0; j < _b; j++ )
+		{
+			// 5,6,7,8,9, 10,11,12,13
+			// 			   8, 7, 6, 5
+			var cls = "black";
+			if( j < a ) cls = "white";
+
+			document.write( "<span class='" + cls + "'>*</span>" );
+		}
+		document.write( "<br>" );
+	}
+
+	</script>
+</body>
+</html>

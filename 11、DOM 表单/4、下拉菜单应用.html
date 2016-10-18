@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、下拉菜单应用</title>
+</head>
+<body>
+	<form action="">
+		<label for="city"></label>
+		<select id="city">
+			<option>杭州</option>
+			<option>上海</option>
+		</select>
+	</form>
+
+	<script>
+	var citys = [ "杭州", "上海", "北京", "长沙", "深圳", "南京" ];
+
+	var city = document.getElementById( "city" );
+
+	// city.options 所有的列表项目 HTML 元素集合（类似于数组的数据结构）
+	// 既可以读取，也可更新下拉列表
+	console.log( city.options[ 0 ] );
+
+	// 删除 option
+	city.remove( 0 );
+
+	// 添加新 option
+	var option = document.createElement( "option" );
+	option.innerText = "火星";
+	option.selected = true;
+	//city.add( option );
+	city.appendChild( option );
+	//city.options.add( option );
+
+	// 清除所有已有的选项
+	city.options.length = 0;
+
+	// 添加新的选项列表
+	for( var i = 0; i < citys.length; i++ )
+	{
+		var opt = new Option( citys[ i ], citys[ i ], null, true );
+		city.appendChild( opt );
+	}
+
+	// 添加 1970~2010 的列表项目
+	city.options.length = 0;
+
+	for( i = 1970; i <= 2010; i++ )
+	{
+		opt = new Option( i, i );
+		city.appendChild( opt );
+	}
+
+
+	</script>
+</body>
+</html>

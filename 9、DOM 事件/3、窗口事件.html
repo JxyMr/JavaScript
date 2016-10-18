@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、窗口事件</title>
+	<style>
+		div {
+			border: 5px solid #6eb8db;
+			background-color: #83d5d5;
+			width: 300px;
+			height: 200px;
+			position: fixed;
+			/*left: calc(50% - 150px);*/
+			/*top: calc(50% - 100px);*/
+		}
+	</style>
+</head>
+<body>
+	当窗口的尺寸发生改变（用户调整窗口大小）时会派发 resize 事件，在设计居中
+	于窗口的应用中非常有用。
+
+	<div id="box"></div>
+
+	<script>
+	var d = document.getElementById( "box" );
+
+	var dw = d.offsetWidth;
+	var dh = d.offsetHeight;
+
+	console.log( dw, dh );
+
+	// 显示网页内容区域的宽高
+	console.log( window.innerWidth, window.innerHeight );
+
+	// 整个浏览器除去标题、地址栏后的可用区域宽高
+	console.log( window.outerWidth, window.outerHeight );
+
+	window.onresize = function( event )
+	{
+		var e = event || window.event;
+
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		// left top
+		var l = w - dw >> 1;// 左乘右除：>>1 除2取整
+		var t = h - dh >> 1;
+
+		d.style.left = l + "px";
+		d.style.top = t + "px";
+	};
+	</script>
+</body>
+</html>

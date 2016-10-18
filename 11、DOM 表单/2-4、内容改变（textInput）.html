@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2-4、内容改变（textInput）</title>
+	<script src="../static/js/dom.js"></script>
+</head>
+<body>
+	<form id="formRegister" action="http://www.baidu.com" method="post">
+
+		<input type="text" id="txtUserName" name="txtUserName"
+			   placeholder="用户名">
+		<button id="btnSubmit">立即提交</button>
+	</form>
+
+	<script>
+	var btnSubmit = document.getElementById( "btnSubmit" );
+	var username = document.getElementById( "txtUserName" );
+	username.addEventer( "textinput", inputHandler );
+
+	function inputHandler( event )
+	{
+		event = event || window.event;
+		var target = event.currentTarget || event.srcElement;
+
+		console.log( target.value );
+	}
+	</script>
+
+</body>
+</html>

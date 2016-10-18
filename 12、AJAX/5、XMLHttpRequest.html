@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5、XMLHttpRequest</title>
+</head>
+<body>
+	<h2>概述</h2>
+	<pre>
+		XMLHttpRequest 在JavaScript中是一个原生对象（IE6以下不支持）
+
+			var xhr = new XMLHttpRequest();
+
+		XHR X 小 H 黄 R 人
+
+		该对象包含2个主要方法：
+		open(method,url,async)
+		初始化HTTP请求参数，但是不发送请求。
+		async 参数为 true（默认）使用异步方式等待返回结果，后面的代码会继续执行
+
+		send(String|FormData|ArrayBuffer)
+		发送HTTP请求，使用传递给open()方法参数，以及传递给该方法的可选参数。
+	</pre>
+
+	<h2>请求头（Request Header）</h2>
+	<pre>
+		设置头信息（必须在 open 方法之后进行设置）
+		xhr.setRequestHeader("name","value");
+
+		查看所有头信息
+		xhr.getAllResponseHeaders()
+	</pre>
+
+	<script>
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = readystateHandler;
+	xhr.open( "get", "students.json", true );
+	xhr.setRequestHeader( "lol", "ajax" );
+	xhr.send();
+
+	function readystateHandler( event )
+	{
+		var xhr = event.currentTarget || event.srcElement;
+		console.log( xhr.status, xhr.readyState );
+
+		if( xhr.status == 200 && xhr.readyState == 4 )
+		{
+			var content = xhr.responseText;
+			var obj = JSON.parse( content );
+
+			console.log( xhr.responseText );
+			console.log( obj, obj.students );
+			console.log( xhr.getAllResponseHeaders() );
+
+			// MIME: content-type: application/json
+		}
+	}
+	//http://192.168.11.28/ajax/reg/guess
+	</script>
+
+</body>
+</html>

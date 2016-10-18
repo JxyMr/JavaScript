@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示和隐藏测试</title>
+	<style>
+		div {
+			width: 200px;
+			height: 100px;
+			background-color: #43a9b0;
+			border: 2px solid #333333;
+			float: left;
+		}
+		.alpha {
+			color: #ffffff;
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			/*background-color: rgba(0, 0, 0, 0.5);*/
+			opacity: 0.5;
+			filter: alpha(opacity=50);
+		}
+	</style>
+</head>
+<body>
+	<div>1</div>
+	<div>2</div>
+	<div style="display:none;">3</div>
+	<div>4</div>
+	<div>5</div>
+	<div>6</div>
+	<div style="visibility:hidden;">7</div>
+	<div>8</div>
+	<div class="alpha">filter:alpha(opacity=50);</div>
+	<div>10</div>
+
+
+
+</body>
+</html>

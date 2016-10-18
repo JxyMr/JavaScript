@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、XML</title>
+</head>
+<body>
+	<h2>XML</h2>
+	<pre>
+		HTML - 超文本标记语言
+		XML - 可扩展标记语言（Extensible Markup Language）
+		共同点在于都使用“标记（标签）”来描述内容。
+	</pre>
+
+	<h2>HTML和XML</h2>
+	<pre>
+		HTML
+		div p span ul li form table...标签有限，都对应特殊的作用，
+		最终都被浏览器解析成网页元素。所以，HTML关注的是“内容展示”。
+
+		XML
+		没有标签……它是关注“数据展示”，所有标签都需要自定义，并且没有任何
+		特殊作用。
+	</pre>
+
+	<h2>XML语法</h2>
+	<ol>
+		<li>标签名对大小写敏感</li>
+		<li>必须也只能有一个根元素（顶级标签）</li>
+		<li>所有标签都必须有对应的结束标签（单标签在末尾加斜杠）</li>
+		<li data-id=2>标签属性值都必须加引号</li>
+		<li>内容中的空格会被保留</li>
+		<li>注释使用 <!-- 注释 --></li>
+		<li>使用 <![CDATA[ ]]> 包含的内容即使是标签也会被当成文本处理</li>
+	</ol>
+
+	<h2>XML标签命名规则</h2>
+	<pre>
+		<b>XML元素</b>
+		指的是“开始标签”到“结束标签”的整个部分。
+		元素可包含“其它元素”、文本或者两者的混合。元素也可以具有属性。
+	</pre>
+	<ol>
+		<li>名称可以包含字母、数字以及其它字符</li>
+		<li>名称不能以数字、标点符号开始</li>
+		<li>名称不能以字符“xml”（XML、Xml）开始（只是约定，实际上还是可以用）</li>
+		<li>名称不能包含空格</li>
+		<li>可使用任何名称，没有保留的字词</li>
+		<li>尽量使用“英文字母、数字、下划线”来作为标签名（与JavaScript标识符同规则）</li>
+		<li>避免在标签名中使用“- . :”等特殊字符</li>
+		<li>如果使用了汉字作为标签名，考虑在不同环境下编码或字符识别所带来的问题</li>
+	</ol>
+
+	<script>
+	//	var xml = "<根></根>";// {根:""}
+	//	xml.根
+	</script>
+
+	<h2>解析与反解析</h2>
+	<pre>
+		解析即将XML类型字符串解析成DOM结构，以达到可以使用DOM操作方法来修改XML
+		的目的。
+		E4X
+	</pre>
+	<script>
+	// 解析
+	var p = new DOMParser();
+	var dom = p.parseFromString( "<xml><good></good></xml>", "text/xml" );
+
+	var good = dom.getElementsByTagName( "good" )[ 0 ];
+	good.innerHTML = "Good <b>job</b>!";
+
+	console.log( dom );
+
+	// 反解析
+	var s = new XMLSerializer();
+	console.log( dom.toString() );
+	console.log( s.serializeToString( dom ) );// toXMLString()
+	</script>
+
+</body>
+</html>

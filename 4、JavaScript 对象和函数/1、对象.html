@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、JavaScript 对象和函数</title>
+</head>
+<body>
+	<h2>JavaScript一切皆对象：字符串、数组、函数……Number等</h2>
+
+	<h2>对象和实例，以及类</h2>
+	<pre>
+		以汽车制造为例，“类”就像是设计的图纸，而制造出来的汽车就是“对象”
+		或者“实例”。实际上所说的对象和实例指的是同一个意思，都是通过 new
+		操作符创建出来的实例（instance）。
+
+		var a = {};// Object
+		var b = [];// Array
+	</pre>
+
+	<h2>JavaScript内置对象</h2>
+	<pre>
+		JavaScript包含的多个内置对象：Array、String、Math、Date、Object、
+		RegExp、Error、Function。
+	</pre>
+
+	<h2>数值对象 - Number</h2>
+	<pre>
+		在JavaScript中，数字不区分整型和浮点型，所有的数字都是由浮点型存储。
+
+		无穷大（Infinity）
+		当数字运算结果超过JavaScript所能表示的数字上限（溢出），结果会变成一个
+		“正无穷大”的值，在JavaScript中以 “Infinity”表示。
+
+		同样地，当负数值超过了下限，结果为“负无穷大”，在JavaScript中以
+		“-Infinity”表示。
+	</pre>
+	<script>
+	var a = Math.pow( 3417239848719327418, 1324712834761823461823648123674 );
+	console.log( a );
+
+	var b = 3.14159265;
+	// toFixed 将数字四舍五入并保留指定位数的小数
+	console.log( _b.toFixed() );// 省略参数时的结果：四舍五入取整
+	console.log( _b.toFixed( 3 ) );// 会四舍五入
+
+	var c = 0xffffff;
+	// toString 将数字转换为指定进制的字符串表示形式
+	console.log( c.toString( 2 ) );
+	console.log( c.toString( 8 ) );
+	console.log( c.toString( 10 ) );
+	console.log( c.toString( 16 ) );
+	</script>
+
+	<h2>数学运算 - Math</h2>
+	<pre>
+		作用：执行常见的算数运算任务。
+
+		其提供多种算术值和函数，“无需实例化即可直接调用”。
+	</pre>
+	<script>
+	// 四舍五入：Math.round(数字)
+	// 将小数四舍五入成整数
+	console.log( Math.PI, Math.round( Math.PI ) );
+
+	// 思考：将小数保留指定位数，并返回数值类型。
+	// toFixed: 四舍五入到指定位数
+	// 那如果，只想保留指定小数位数，而不四舍五入，咋办？
+	// 3.141592653589793 => 3位小数 => 3.141
+
+	// 以下 /1000 改成 *0.001 以此提高运算效率
+	console.log( parseInt( Math.PI * 1000 ) * 0.001 );
+
+	// 取几个数中的最大值或者最小值
+	console.log( Math.max( 1, 56, 20, 87 ) );
+	console.log( Math.min( 1, 56, 20, 87 ) );
+
+	// 绝对值
+	var num = -10;
+	console.log( num >= 0 ? num : num * -1, Math.abs( num ) );
+
+	// 随机数
+	// 取0~1之间的随机小数，范围最小等于0，最大不超过1且不包含1。
+	console.log( Math.random(), Math.random() );
+
+	// 取0-10之间的随机整数，不包括10
+	console.log( Math.random() * 10, Math.random() * 10 >> 0 );
+
+	// 取1-10之间的随机整数，包括1和10
+	console.log( Math.random() * 10 + 1 >> 0 );
+
+	// 取 1-20 之间不重复的5个随机数
+	var flag = [];
+	for( var i = 1; i <= 20; i++ )
+	{
+		flag.push( i );
+	}
+
+	for( i = 0; i < 5; i++ )
+	{
+		var x = Math.random() * flag.length >> 0;
+		console.log( flag[ x ] );
+		flag.splice( x, 1 );
+	}
+	</script>
+
+	<h2>日期对象 - Date</h2>
+	<pre>
+		Date对象用于处理日期和时间相关事务。
+
+		特性：日期对象之间可以直接进行关系运算，使用比较运算符。
+
+		创建日期：
+		new Date();// 当前日期时间
+
+		通过时间戳创建（从1970年1月1日至今的毫秒数）
+		new Date(毫秒);
+
+		通过字符串表示的日期创建（如“2016-09-13”）
+		new Date(dateString);
+
+		通过详细设置创建
+		new Date(y, m, d, h, min, sec, millisecond);
+	</pre>
+	<script>
+	var d = new Date();
+
+	console.log( "年：", d.getFullYear() );
+	console.log( "月：", d.getMonth() + 1 );// 0~11
+	console.log( "曰：", d.getDate() );// 一个月中第几天，1-31
+
+	console.log( "星期：", d.getDay() );//周日是0，星期一是1...
+
+	console.log( "小时：", d.getHours() );
+	console.log( "分钟：", d.getMinutes() );
+	console.log( "秒钟：", d.getSeconds() );
+
+	// 取得当前时间戳
+	var time = d.getTime();
+	console.log( time );
+
+	// 通过当前时间戳，输出昨天的日期
+	var d2 = new Date( time - 86400000 );
+	console.log( d2.getFullYear(), d2.getMonth() + 1, d2.getDate() );
+
+	// 取出本周一的日期（2016-9-13）
+	var date = new Date();
+	var day = date.getDay();// 2
+	var d3 = new Date( time - 86400000 * (day - 1) );
+	console.log( "D3:", d3.getFullYear(), d3.getMonth() + 1, d3.getDate() );
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+	<!--
+	所有标签都必须对应结束标签
+	若是单标签也同样需要在 > 前面加上斜杠如<br/>
+	-->
+	<student id="1">
+		<name>张三</name>
+		<sex>男</sex>
+	</student>
+	<student id="2">
+		<name>李四</name>
+		<sex>男</sex>
+	</student>
+	<student id="3">
+		<name>王五</name>
+		<sex>男</sex>
+	</student>
+</students>

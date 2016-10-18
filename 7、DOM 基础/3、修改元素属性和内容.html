@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、修改元素属性和内容</title>
+</head>
+<body>
+	<h2>修改元素属性</h2>
+	<pre>
+		通过对象属性设置元素属性：
+		（只针对标准属性，特殊属性名如 class 访问时修改成 className,
+		for 访问时修改成 htmlFor）
+
+		var a = document.getElementById("link");
+		var href=a.href;//a["href"]
+
+		-------------------------------------------------------
+
+		通过方法设置属性：
+		getAttribute、setAttribute
+		var href = a.getAttribute("href");
+
+		hasAttribute、removeAttribute
+
+	</pre>
+
+	<a id="link" href="http://www.baidu.com">测试链接</a>
+	<script>
+	var a = document.getElementById( "link" );
+	var href = a.href;//a["href"]
+
+	//a.href = "#";
+	a[ "href" ] = "#";
+	//a.setAttribute( "href", "#" );
+
+	// 检测标签上有没有显示的设置指定的属性
+	console.log( a.hasAttribute( "class" ) );
+
+	var href1 = a[ "href" ];
+	var href2 = a.getAttribute( "href" );
+
+	console.log( href );
+	console.log( href1 );
+	console.log( href2 );
+	</script>
+
+	<h2>修改元素的内容</h2>
+	<script>
+	// 修改标签的文本内容（去除所有HTML内容的文本内容）
+	a.innerText = "这是新的链接";
+
+	// 修改标签的HTML内容
+	// 设置内部内容
+	a.innerHTML = "这是有HTML内容<span style='color:red;'>新链接</span>";
+
+	// 设置包含标签元素本身的内容（实质等于替换）
+	a.outerHTML = "HTML内容<span style='color:red;'>链接</span>";
+	</script>
+
+</body>
+</html>

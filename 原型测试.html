@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原型测试</title>
+</head>
+<body>
+
+	<script>
+	function Nodes()
+	{
+		var _length = 0;
+
+		this.removedNodes();
+
+		this.__defineGetter__( "length", function()
+		{
+			return _length;
+		} );
+	}
+
+	Nodes.prototype = HTMLCollection.prototype;
+	//Nodes.__proto__ = NodeList.__proto__;
+
+	var nodes = new Nodes();
+	//nodes.append( "0", new Option( 1, 1 ) );
+	print( nodes );
+	console.log( nodes );
+
+	function print( obj )
+	{
+		for( var ns in obj )
+		{
+			if( typeof obj[ ns ] == "object" )
+			{
+				print( obj[ ns ] );
+			}
+			else
+			{
+				console.log( ns + ":", obj[ ns ] );
+			}
+		}
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>视频绘制</title>
+</head>
+<body>
+	<video id="video" controls autoplay>
+		<source src="mov.mp4" type="video/mp4"/>
+	</video>
+
+	<canvas id="myCanvas" width="500" height="400"></canvas>
+	<script>
+	var c = document.getElementById( "myCanvas" );
+	var ctx = c.getContext( "2d" );
+
+	var v = document.getElementById( "video" );
+	var timer;
+
+	v.addEventListener( "play", play );
+	v.addEventListener( "pause", stop );
+	v.addEventListener( "ended", stop );
+
+	function play()
+	{
+		timer = setInterval( function()
+		{
+			ctx.drawImage( v, 0, 0 );
+		}, 16 );
+	}
+
+	function stop()
+	{
+		clearInterval( timer );
+	}
+	</script>
+</body>
+</html>

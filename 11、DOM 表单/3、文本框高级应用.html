@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、文本框高级应用</title>
+	<script src="input.typer.js"></script>
+</head>
+<body>
+	<form action="">
+		<label>内容来源：</label>
+		<input type="text" id="txtContent" name="txtContent"
+			   placeholder=""
+			   ondrop="changeHandler(event)"
+			   oninput="changeHandler(event)"
+			   onpropertychange="changeHandler(event)"
+			   onbeforepaste="changeHandler(event)">
+		<input type="number" id="txtNumber" name="txtNumber" placeholder="数字输入框">
+		<input type="text" id="nn" name="nn" data-type="number" placeholder="数字输入框">
+		<h2>onkeydown、onbeforepaste、onpaste、ondrop</h2>
+	</form>
+
+	<script>
+	function changeHandler( event )
+	{
+		event = event || window.event;
+		var target = event.currentTarget || event.srcElement;
+		var val;
+
+		switch( event.type )
+		{
+			// 针对IE浏览器
+			case "beforepaste":
+			{
+				var clip = event.clipboardData || window.clipboardData;
+				val = clip.getData( "text" );
+				clip.setData( "text", val.replace( /[^\da-z]/g, "" ) );
+				break;
+			}
+			// 而chrome、firefox中没有beforepaste，用oninput替代
+			case "input":
+			case "propertychange":
+			{
+				val = target.value;
+				target.value = val.replace( /[^\da-z]/g, "" );
+				break;
+			}
+			case "drop":
+			{
+				val = event.dataTransfer.getData( "text" );
+				target.value += val.replace( /[^\da-z]/g, "" );
+
+				// 兼容方式阻止默认行为
+				event.preventDefault ? event.preventDefault() : event.returnValue = false;
+				break;
+			}
+		}
+	}
+	</script>
+</body>
+</html>

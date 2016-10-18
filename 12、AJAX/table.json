@@ -1,0 +1,10 @@
+[
+	{ "name":"姓名", "age":"年龄", "sex":"性别", "contact":"联系方式" },
+	{ "name":"Bob Dylan", "age":20, "sex":1, "contact":"00-1-213-4849246" },
+	{ "name":"Rod Stewart", "age":22, "sex":0, "contact":"00-1-213-2498281" },
+	{ "name":"Kenny Rogers", "age":21, "sex":1, "contact":"00-1-213-7885755" },
+	{ "name":"separator" },
+	{ "name":"Will Smith", "age":42, "sex":0, "contact":"00-1-213-8915587" },
+	{ "name":"Dr.Hook", "age":62, "sex":0, "contact":"00-1-213-7527068" },
+	{ "name":"Gary Moore", "age":35, "sex":1, "contact":"00-1-213-3121278" }
+]

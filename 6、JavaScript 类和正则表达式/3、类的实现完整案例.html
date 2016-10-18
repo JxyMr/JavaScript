@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、类的实现完整案例</title>
+</head>
+<body>
+	<h2>案例</h2>
+	<script>
+	function Person( name, age )
+	{
+		// 私有属性：只能在类内部使用
+		var _name = name;
+
+		// 私有方法：只能在类内部使用
+		//var _walk = function(){};
+		function _walk()
+		{
+			console.log( "走起..." );
+		}
+
+		// 公有属性：可以在类内部，以及类的实例对象上使用
+		this.age = age;
+
+		// 公有方法
+		this.talk = function( content )
+		{
+			console.log( content );
+		};
+	}
+
+	Person.prototype.weight = 56;
+	Person.prototype.eat = function()
+	{
+		console.log( "吃..." );
+	};
+
+	// 静态成员可以在无需实例化的前提下直接使用
+	Person.TYPE = "fat";
+
+	var p = new Person( "Davi", 20 );
+	p.age = 30;
+	console.log( p.age, Person.TYPE );
+
+	// instanceof
+	var d = new Date();
+	console.log( d instanceof Date );
+	console.log( d instanceof Object );// true，所有对象都是 Object 的实例
+
+	var a = [ 1, 2, 3 ];
+	console.log( a instanceof Array );
+	console.log( a instanceof Object );
+
+	console.log( "p:", p instanceof Person );
+	console.log( "p:", p instanceof Object );
+	</script>
+
+	<pre>
+		Person：构造函数
+		Person.prototype：函数的原型对象
+		Person.prototype.constructor：指向 Person 本身
+		new Person：类的实例对象
+
+		私有属性和私有方法统称为“私有(private)成员”
+		公有属性和公有方法统称为“公有(public)成员”
+		静态属性和静态方法统称为“静态(static)成员”
+	</pre>
+
+	<h2>getter 和 setter</h2>
+	<script>
+	function Person1()
+	{
+		this.name = null;
+	}
+
+	function Person2()
+	{
+		var _name = null;
+
+		// 只有读取器时，此属性被称为“只读属性”
+		//		this.__defineGetter__( "name", function()
+		//		{
+		//			return _name;
+		//		} );
+
+		// 只有设置器时，此属性被称为“只设（写）属性”
+		this.__defineSetter__( "name", function( value )
+		{
+			_name = value;
+		} );
+	}
+
+	var p1 = new Person1();
+	p1.name = "p1n";
+	console.log( p1.name );
+
+	var p2 = new Person2();
+	p2.name = "p2n";
+	console.log( p2.name );
+	</script>
+
+</body>
+</html>

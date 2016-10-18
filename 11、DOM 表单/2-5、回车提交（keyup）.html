@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2-5、回车提交（keyup）</title>
+</head>
+<body>
+	<form id="formRegister" action="http://www.baidu.com" method="post">
+
+		<input type="text" id="txtUser" name="txtUser"
+			   placeholder="用户名" onkeyup="keyupHandler(event)">
+
+		<button id="btnSubmit">立即提交</button>
+		<button type="reset">重置</button>
+		<button type="button" onclick="resetHandler()">重置</button>
+	</form>
+
+	<script>
+	var form = document.getElementById( "formRegister" );
+	var btnSubmit = document.getElementById( "btnSubmit" );
+
+	function keyupHandler( event )
+	{
+		event = event || window.event;
+
+		if( event.which == 13 )
+		{
+			form.submit();
+		}
+	}
+
+	function resetHandler()
+	{
+		form.reset();
+	}
+	</script>
+
+</body>
+</html>

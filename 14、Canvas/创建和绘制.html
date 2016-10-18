@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建和绘制</title>
+	<style>
+		body, ul, ol, li, p { padding: 0; margin: 0; }
+		html, body { height: 100%; }
+		#stage {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="stage"></canvas>
+
+	<script>
+	var c = document.getElementById( "stage" );
+
+	// context 上下文对象
+	var ctx = c.getContext( "2d" );
+	resize();
+	draw();
+
+	window.onresize = function()
+	{
+		// 先缩放画布
+		resize();
+
+		// 清除画布
+		ctx.clearRect( 0, 0, window.innerWidth, window.innerHeight );
+
+		// 重新绘制
+		draw();
+	};
+
+	function resize()
+	{
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		c.width = w;
+		c.height = h;
+	}
+
+	function draw()
+	{
+		// 绘制入口
+		ctx.fillStyle = "rgba(200,0,0,1)";
+		ctx.strokeStyle = "#333333";
+		ctx.lineWidth = 10;
+		ctx.fillRect( 100, 100, 200, 100 );
+		ctx.strokeRect( 100, 100, 200, 100 );
+
+		drawRect();
+
+		// 画任意多边形
+		ctx.lineWidth = 20;
+		ctx.lineJoin = "round";
+		drawThing(
+				{ x: 500, y: 200 },
+				{ x: 600, y: 500 },
+				{ x: 400, y: 300 }
+		);
+		ctx.fill();
+		ctx.stroke();
+
+		drawThing(
+				{ x: 500, y: 200 },
+				{ x: 600, y: 50 },
+				{ x: 400, y: 50 }
+		);
+
+		// 画圆
+		ctx.moveTo( 900, 400 );
+		drawCircle( 800, 400, 100 );
+
+		ctx.moveTo( 900, 100 );
+		ctx.arcTo( 1000, 100, 1000, 200, 200 );
+
+		ctx.fill();
+		ctx.stroke();
+	}
+
+	function drawCircle( x, y, r )
+	{
+		ctx.arc( x, y, r, 0, 0.5 * Math.PI );
+	}
+
+	function drawRect()
+	{
+		ctx.fillRect( 300, 300, 200, 200 );
+		ctx.fillStyle = "#ffffff";
+		ctx.fillRect( 350, 350, 120, 120 );
+	}
+
+	/**
+	 * 任意绘制多个点之间的路径
+	 * @param point1 坐标点1 {x:0,y:0}
+	 * @param point2 坐标点2 {x:0,y:0}
+	 */
+	function drawThing( point1, point2 )
+	{
+		ctx.beginPath();
+		ctx.moveTo( point1.x, point1.y );
+
+		for( var i = 1; i < arguments.length; i++ )
+		{
+			var p = arguments[ i ];
+			ctx.lineTo( p.x, p.y );
+		}
+		ctx.closePath();
+	}
+
+	</script>
+</body>
+</html>

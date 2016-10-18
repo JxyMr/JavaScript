@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、JavaScript 基本语法</title>
+</head>
+<body>
+	<h2>标识符</h2>
+	<pre>
+		JavaScript 中“变量、函数、数组、对象”等的名字，称之为“标识符”。
+
+		标识符由“字母、数字、下划线和$”组成，不能以数字开头，并且不能是JavaScript中的保留关键字。
+
+		什么是保留关键字？
+		比如：if else for while continue break function
+		不能使用这些关键字作为自己的标识符，否则会发生严重的错误，导致程序停止运行。
+
+		标识符举例：
+		$35  a2  PI  _2016_09_09 6s(错的) sb
+	</pre>
+
+	<h2>JavaScript 区分大小写</h2>
+	<pre>
+		所以在命名变量、函数时多加注意，如：productId和productID是两个不同的标识符
+	</pre>
+
+	<h2>代码注释</h2>
+	<pre>
+		目的在于让一行的内容不被解释器执行，而被忽略。
+		仅仅是给我们自己备注、提示所用。
+	</pre>
+	<pre>
+	// ------------行注释------------
+
+	/*
+	 块注释
+	 -------------------------------
+	 v4ynrv9w384m
+	 wb4
+	 5w4
+	 5bw
+	 45b
+	 w345
+	 wb34
+	 5
+	 -------------------------------
+	 */
+
+	// JavaScript是一门弱类型语言，使用时无须声明数据类型
+	// 数据类型需要等到程序运行的时候根据其值来智能判断
+
+	/**
+	 * 求两个数的和
+	 * @param {number} a 数值 a
+	 * @param {number} b 数值 b
+	 * @returns {number}
+	 */
+	function qiuhe( a, b )
+	{
+		return a * b;
+	}
+	</pre>
+
+	<h2>变量声明</h2>
+	<pre>
+	变量若只声明，而不赋值，其默认值统一都会是 undefined（未定义）。
+	</pre>
+	<script>
+	var a = 10;// 声明并赋值
+	var b;// 只声明
+	</script>
+
+</body>
+</html>

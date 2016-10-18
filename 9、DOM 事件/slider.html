@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slider</title>
+	<script src="../static/js/dom.js"></script>
+	<style>
+		body {
+			padding: 100px;
+		}
+		.slider {
+			width: 500px;
+			height: 10px;
+			background-color: #666666;
+			position: relative;
+		}
+		.slider > .buffer {
+			width: 0;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 0.5);
+			position: absolute;
+		}
+		.slider > .processor {
+			width: 50%;
+			height: 100%;
+			background-color: rgba(60, 200, 150, 0.8);
+			position: absolute;
+		}
+		.slider > .controller {
+			position: absolute;
+			width: 16px;
+			height: 16px;
+			left: -8px;
+			top: -3px;
+			background-color: rgb(255, 255, 255);
+			border: 1px solid #cccccc;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="slider">
+		<div class="buffer"></div>
+		<div class="processor"></div>
+		<div class="controller"></div>
+	</div>
+
+	<script>
+	var slider = document.querySelector( ".slider" );
+	var buffer = document.querySelector( ".buffer" );
+
+	var step = 0.05;// 每次5%
+
+	// 用时间驱动模拟缓冲进度
+	var timer = window.setInterval( function()
+	{
+		var sw = slider.offsetWidth;
+		var w = buffer.offsetWidth;
+
+		buffer.style.width = w + sw * step + "px";
+
+		if( w + sw * step == sw )
+		{
+			window.clearInterval( timer );
+		}
+	}, 100 );
+
+	// 控制点拖动
+	var processor = document.querySelector( ".processor" );
+	var controller = document.querySelector( ".controller" );
+	var offsetX = 0;
+
+	// element.mousedown 拎起来准备拖动
+	controller.addEventer( "mousedown", dragDropHandler );
+
+	function dragDropHandler( event )
+	{
+		switch( event.type )
+		{
+			case "mousedown":
+			{
+				// window.mousemove 拎着走
+				offsetX = event.clientX - slider.offsetLeft - controller.offsetLeft;
+				window.addEventer( "mousemove", dragDropHandler );
+
+				// window.mouseup 扔下
+				window.addEventer( "mouseup", dragDropHandler );
+				break;
+			}
+			case "mousemove":
+			{
+				var tx = event.clientX - slider.offsetLeft - offsetX;
+
+				var halfW = controller.offsetWidth >> 1;
+
+				tx = tx < -halfW ? -halfW : tx;
+				tx = tx > slider.offsetWidth - halfW ? slider.offsetWidth - halfW : tx;
+
+				controller.style.left = tx + "px";
+
+				processor.style.width = tx + halfW + "px";
+				break;
+			}
+			case "mouseup":
+			{
+				window.removeEventer( "mousemove", dragDropHandler );
+				window.removeEventer( "mouseup", dragDropHandler );
+				break;
+			}
+		}
+	}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>猜数字</title>
+</head>
+<body>
+	<script>
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = readystateHandler;
+
+	// POST 方式提交
+	xhr.open( "post", "http://192.168.11.28/ajax/reg/guess" );
+	xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+	xhr.send( "num=12&a=0&b=1" );
+
+	// GET 方式提交
+	xhr.open( "get", "http://192.168.11.28/ajax/reg/guess?num=12&a=0&b=1" );
+	xhr.send();
+
+	function readystateHandler( e )
+	{
+		if( xhr.status == 200 && xhr.readyState == 4 )
+		{
+			document.write( xhr.responseText );
+		}
+	}
+
+	</script>
+</body>
+</html>

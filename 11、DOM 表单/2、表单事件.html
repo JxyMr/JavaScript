@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、表单事件</title>
+</head>
+<body>
+	<h2>表单提交（submit）</h2>
+	<pre>
+		event.target
+		event.type
+		handler
+
+		表单提交事件（onsubmit）是 form 元素才派发的事件，
+		是一种浏览器内置的默认行为。
+
+		绑定表单事件，可以直接给表单元素添加 onsubmit="handler(event)" 属性的
+		形式，也可以添加事件监听（addEventListener，IE8及以下使用attachEvent）
+
+		当我们需要手动（使用纯代码）让表单提交时，可以使用 form.submit() 方法
+		来实现。
+	</pre>
+
+	<h2>阻止表单提交</h2>
+	<pre>
+		在IE9及以上，以及chrome等使用 event.preventDefault()
+		在IE8及以下，使用 event.returnValue = false 的方法来取消提交。
+	</pre>
+
+	<h2>选项更改（change）</h2>
+	<pre>
+		文本输入框（text）、文本域（textarea）输入内容后，离开（失去焦点）时
+		会派发 “onchange” 事件
+		下拉框（select）选项被改变时，会派发“onchange”事件
+	</pre>
+
+	<h2>内容改变（textInput）</h2>
+	<pre>
+		keypress 与 textInput
+		IE9及以上，Chrome支持该事件，而且该事件必须通过JavaScript代码添加事件
+		监听才有效。
+		而且注意，在IE中事件名称为“textinput”，在Chrome中事件名称为“textInput”
+		注意！注意！请注意！字母大小写
+	</pre>
+
+	<h2>回车提交（keyup）</h2>
+	<pre>
+		通过以下步骤实现：
+		* 在输入框元素上添加 onkeyup="keyupHandler(event)"
+		* 然后实现表单提交代码：form.submit()
+	</pre>
+
+	<h2>表单重置（reset）</h2>
+	<pre>
+		在表单中，按钮类型为 type="reset" 自动具备重置表单数据的功能
+		同样也可以通过 form 表单元素来调用 form.reset() 实现重置表单
+	</pre>
+
+</body>
+</html>

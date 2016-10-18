@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习题</title>
+</head>
+<body>
+	<script>
+	// 1、输出 a-z 之间的字母，并且间隔大小写：A b C d E f G....
+
+	// 2、如何去除数组 [1,2,3,6,1,2,8,3,5,1,2] 中重复的元素
+
+	// 3、求数组 [31,21,6,12,18,20,22,15] 从大到小排序后前4个元素的和
+
+	// 4、对象数组应用
+	var students = [
+		{ age: 18, name: "Jack" },
+		{ age: 19, name: "Apple" },
+		{ age: 20, name: "Lynn" },
+		{ age: 12, name: "Dav" },
+		{ age: 28, name: "Pet" }
+	];
+
+	// 将以上数组中年龄 age 小于等于20的学生信息组成新的数组
+	var st = [];
+
+	for( var i = 0; i < students.length; i++ )
+	{
+		var a = students[ i ];
+		//console.log( a.age, a[ "age" ] );
+
+		if( a.age <= 20 )
+			st.push( a );
+	}
+	console.log( st );
+
+	// 将以上数组按照年龄 age 从小到大排序
+	students.sort( function( a, b )
+	{
+		return a.age - _b.age;
+	} );
+	console.log( students );
+
+	</script>
+</body>
+</html>

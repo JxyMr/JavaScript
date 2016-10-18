@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5、按钮高级应用</title>
+</head>
+<body>
+	<h2>状态按钮（Loading...）</h2>
+	<form action="">
+		<button id="btnSubmit" data-loading="Loading..."
+				onclick="btnClickHandler(event)">立即提交
+		</button>
+		<input type="button" value="立即提交">
+	</form>
+	<script>
+	function btnClickHandler( event )
+	{
+		event = event || window.event;
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+
+		var target = event.currentTarget || event.srcElement;
+
+		// 第一步：取出 data-loading 属性值
+		var newLabel = target.getAttribute( "data-loading" );
+
+		// 第二步：先缓存旧的标签
+		var oldLabel = target.innerText;
+		target.setAttribute( "data-cachelabel", oldLabel );
+		target.setAttribute( "disabled", "true" );
+
+		// 第三步：设置新的标签
+		target.innerText = newLabel;
+
+		// 测试：1秒后还原标签
+		setTimeout( function()
+		{
+			resetButton( "btnSubmit" );
+		}, 1000 );
+	}
+
+	function resetButton( elementid )
+	{
+		var btn = document.getElementById( elementid );
+		var oldLabel = btn.getAttribute( "data-cachelabel" );
+
+		btn.removeAttribute( "disabled" );
+		btn.innerText = oldLabel;
+	}
+	</script>
+
+	<h2>倒计时按钮</h2>
+	<pre>
+		如：手机短信验证码发送，时间间隔限制（60秒）
+	</pre>
+	<form action="">
+		<button id="btnGetCode"
+				data-loading="{d} 秒后重新请求"
+				data-time="5"
+				onclick="btnGetCodeHandler(event)">请求验证码
+		</button>
+	</form>
+	<script>
+	function btnGetCodeHandler( event )
+	{
+		event = event || window.event;
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+
+		var target = event.currentTarget || event.srcElement;
+
+		// 第一步：先缓存旧标签到 data-cachelabel
+		var oldLabel = target.innerText;
+		target.setAttribute( "data-cachelabel", oldLabel );
+		target.setAttribute( "disabled", "true" );
+
+		// 第二步：开启一个循环计时器 setInterval
+		// 当最后一秒时，将按钮标签还原，并且停止计时器
+		var temp = target.getAttribute( "data-loading" );
+		var time = target.getAttribute( "data-time" ) - 0;
+		var elapsed = 0;
+
+		// 计时器第一次执行是在 所设定的间隔时间 之后
+		// 并不会立即执行第一次
+		timerHandler();
+		var timeid = setInterval( timerHandler, 1000 );
+
+		function timerHandler()
+		{
+			if( elapsed >= time )
+			{
+				// 最后一次
+				resetButton( "btnGetCode" );
+				clearInterval( timeid );
+			}
+			else
+			{
+				// 使用 elapsed 替换模板数据后，设置到标签上
+				var cur = time - elapsed;
+
+				// {d} 秒后重新请求
+				var content = temp.replace( "{d}", cur + "" );
+				target.innerText = content;
+			}
+
+			elapsed++;
+		}
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、错误处理</title>
+</head>
+<body>
+	<h2>错误处理概述</h2>
+	<pre>
+		错误处理对于 web 应用程序至关重要，不能提前预测到可能发生的错误，
+		及采取恢复策略，将会导致程序被中断无法正常运行，导致极差的用户体验。
+
+		作为开发人员，我们必须要知道
+		* 何时可能出错
+		* 会出什么错误
+		* 为什么出错
+		尤其是如今流行的 SPA（Single Page Application）中体现更加重要。
+
+		举几个栗子：
+		* 当收集表单数据出现意外的输入数据时
+		* 当函数调用时传入非预期的参数时
+		* 当某个特定的浏览器环境下，找不到需要的属性或者方法时
+
+		---------------------------------------------------
+		程序语言中的“错误Error”，一般也被称为“异常Exception”，
+		而“错误处理”也被称为“异常处理”。
+	</pre>
+
+	<h2>Error 对象</h2>
+	<pre>
+		包含错误信息描述的对象，它也是 JavaScript 原生对象。
+
+		当代码解析或者运行发生错误时，JavaScript会自动生成并抛出来一个
+		Error对象的实例，然后整个程序就“中断在发生错误的地方”。
+
+		Error对象创建语法：
+		Error( message, [errorid] );
+	</pre>
+	<pre>
+	var err = new Error( "王尼玛, your wife runned follow anybody！！！", 1001 );
+	throw err;
+
+	console.log( "go on...." );
+	</pre>
+
+	<h2>抛出异常</h2>
+	<pre>
+		用 throw 关键字来抛出自定义的 Error 对象实例：
+		throw new Error("message",1001);
+	</pre>
+
+	<h2>常见的异常错误</h2>
+	<pre>
+		EvalError
+		错误发生在 eval() 方法中
+
+		ReferenceError
+		引用的内容不可用
+
+		SyntaxError
+		JavaScript 语法错误
+
+		RangeError
+		数值超出范围
+
+		TypeError
+		变量类型错误
+
+		URIError
+		错误发生在 encodeURI() 或者 decodeURI() 中
+	</pre>
+	<script>
+	// eval() 将字符串按照代码来解释并执行
+	eval( "var yb='mb';" );
+	console.log( yb );
+	</script>
+
+	<h2>异常捕获（错误处理）</h2>
+	<script>
+	// 语句异常捕获
+	// try...catch...
+
+	try
+	{
+		// 不要滥用try-catch：效率不高，尽量少用
+		console.log( snow );
+	}
+	catch( error )
+	{
+		console.log( "message:", error.message );
+		console.log( "name:", error.name );
+	}
+
+	window.onerror = function( message, url, lineNum )
+	{
+		console.log( arguments[ 0 ] );
+		console.log( arguments[ 1 ] );
+		console.log( arguments[ 2 ] );
+
+		return false;
+	};
+
+	var arr = [ 1, 2, 3 ];
+	console.log( arr.indexOf( 2 ) );
+
+	// 发生全局错误，能否继续执行以下代码
+	console.log( "go on...." );
+	</script>
+
+</body>
+</html>

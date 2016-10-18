@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、如何使用 JavaScript</title>
+	<script>
+	// head 标签末尾
+	// 若需要操作 body 中的元素，必须等待 文档加载完成，才能操作这些元素
+	</script>
+</head>
+<body>
+	<h2>执行顺序</h2>
+	<pre>
+		JavaScript 和 HTML 等都一样，其遵循“从上至下”的规则，“顺序执行”脚本代码。
+	</pre>
+
+	<h2>语句</h2>
+	<pre>
+		JavaScript程序是语句的集合，一条JavaScript语句相当于英语中一个完整的句子。
+		一条语句由一个或者多个“表达式、关键字、运算符”组成。
+		一条语句写一行，语句之间用分号;隔开，分号是JavaScript语句的终止符。
+	</pre>
+
+	<h2>脚本程序位置</h2>
+	<pre onclick="alert('click....')">
+		JavaScript代码必须写在 &lt;script&gt;&lt;/script&gt;（HTML实体） 中，
+		或者以单独的 JavaScript 文件来存储。
+		甚至可以将JavaScript代码放在元素的属性值中执行。
+
+		script 标签可以放在网页中的任何位置，但是一般放在 head 标签末尾，或者 body 标签中。
+	</pre>
+
+	<a href="javascript:alert('a....');">你点点试试看</a>
+
+	<script src="first_js.js"></script>
+	<script>
+	// 若需要加载的 JavaScript 文件非常大，由于代码是从上往下执行，这需要
+	// 待整个JS加载完成才能看到网页的内容，这大大的推迟了网页内容的显示
+	// 若要解决，需要将这些大文件放到 body 标签最后面去加载，即先显示内容再加载JavaScript
+	</script>
+
+</body>
+</html>

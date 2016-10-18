@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、JavaScript 中的 CSS</title>
+</head>
+<body>
+
+	<h2>CSSStyleDeclaration</h2>
+	<pre>
+		元素都有一个 style 属性，其并不是和其它属性值一样是字符串，而是
+		CSSStyleDeclaration 对象实例，其用来读取和设置当前元素的样式值。
+
+		访问样式：
+		element.style.样式名 = 样式值;
+
+		当遇到如 font-size 特殊的样式名时，将连字符 - 去掉，随后首字母大写。
+		如：element.style.fontSize = "48px";
+		或者
+		element.style["font-size"] = "48px";
+
+		当遇到和JavaScript中的保留关键字冲突时，
+		在 chrome、IE9以上等浏览器环境下加上 cssFloat 前缀
+		在IE8及以下浏览器加上 styleFloat 前缀
+
+	</pre>
+
+	<h2>element.cssText</h2>
+
+	<h2>定义的样式（Defined Style）</h2>
+	<pre>
+		所有在HTML元素的 style 属性上，或者 style 标签中，以及外部样式，
+		我们都是一种“书写”的样式，而这些定义的样式仅仅是我们自己所写，最终以
+		什么样式值为准，浏览器会进行最终的计算决定。
+
+		element.style 对应的属性值仅仅是元素 style 属性上所设置的值。
+	</pre>
+
+
+	<h2>计算后的样式（计算样式 - Computed Sytle）</h2>
+	<pre>
+		浏览器为了显示元素样式，会相对于同一个元素计算所有来源的样式值，其计算
+		结果是一种最终实际用来显示元素样式的属性值，这组实际值就是元素的“计算样式”
+
+	</pre>
+
+	<h2>JavaScript 设置 CSS 类</h2>
+	<pre>
+		className
+		设置或者读取元素的 class 属性的值，其包含所有已经设置的 css 类。
+		返回：以空格分隔的 CSS 类名的字符串
+
+		classList
+		与 className 同样返回所有已经设置的 CSS 类名，但结果是
+		DOMTokenList 类型，是一个类似于数组的数据结构，通过像数组一样简易的增加
+		删除 CSS 类。
+		classList 在IE10才被支持，IE10以下全部显示属性为 undefined
+
+
+	</pre>
+
+</body>
+</html>

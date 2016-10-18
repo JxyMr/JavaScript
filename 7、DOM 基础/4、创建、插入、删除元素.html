@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、创建、插入、删除元素</title>
+</head>
+<body>
+	<h2>创建元素</h2>
+	<script>
+	var table = document.createElement( "table" );
+
+	var tr = document.createElement( "tr" );
+	table.appendChild( tr );
+
+	var td = document.createElement( "td" );
+	var td2 = document.createElement( "td" );
+
+	td.innerText = "单元格一";
+	td2.innerText = "二格元单";
+
+	tr.appendChild( td );
+	tr.insertBefore( td2, td );
+
+	// 找到这个 body 元素
+	var body = document.getElementsByTagName( "body" )[ 0 ];
+	console.log( body );
+	body.appendChild( table );
+
+	//tr.removeChild( td2 );
+
+	var td3 = document.createElement( "td" );
+	td3.innerText = "三元格元三";
+	tr.replaceChild( td3, td );
+
+	// 用页面中已经存在的元素相互操作，类似于删除
+	tr.replaceChild( td3, td2 );
+	</script>
+
+</body>
+</html>

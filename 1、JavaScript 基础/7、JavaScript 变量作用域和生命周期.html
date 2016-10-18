@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7、JavaScript 变量作用域和生命周期</title>
+</head>
+<body>
+	<h2>作用域</h2>
+	<pre>
+		全局作用域：直接写在 script 标签最外层的作用域。
+		局部作用域：函数中的作用域，称之为“局部作用域”。
+	</pre>
+
+	<script>
+	var all = 10;// 它是处于全局作用域的“全局变量”
+	// 在接下来的所有的代码中，可以任意使用该变量。
+
+	function fn()
+	{
+		var x = 5;// 局部作用域中的“局部变量”
+
+		return x + all;
+	}
+
+	console.log( fn(), x );
+	</script>
+
+	<h2>生命周期</h2>
+	<pre>
+		JavaScript的变量生命周期在它声明时初始化，
+		“局部变量”在函数执行完毕后销毁。
+		“全局变量”在页面关闭时销毁。
+	</pre>
+
+</body>
+</html>

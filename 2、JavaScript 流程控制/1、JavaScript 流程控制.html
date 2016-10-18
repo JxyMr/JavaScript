@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、JavaScript 流程控制</title>
+</head>
+<body>
+	<h2>JavaScript 中的三大流程</h2>
+	<pre>
+		* 顺序流程：代码从上至下 “顺序执行”
+		* 分支（选择）控制：代码按照条件表达式来 “选择执行” 其中的一条分支
+		* 循环控制：代码按照条件表达式来 “重复执行” 指定的次数
+	</pre>
+
+	<h2>分支控制</h2>
+	<script>
+	/**
+	 单分支语法：
+	 ----------------------------------------------
+	 if(条件表达式)
+	 {
+	 	语句;
+	 }
+
+	 当要执行的语句只有一条时，可以省略花括号：
+	 ----------------------------------------------
+	 if(条件表达式) 语句;
+	 if(条件表达式)
+	 语句;
+	 */
+
+	if( 1 + 1 == 2 ) console.log( "活该单身狗..." );
+
+	/**
+	 双分支语法：
+	 ----------------------------------------------
+	 if(条件表达式)
+	 {
+	 	条件成立时执行语句;
+	 }
+	 else
+	 {
+	 	条件不成立时执行语句;
+	 }
+
+	 ?: 三元运算符
+	 ----------------------------------------------
+	 条件表达式 ? 条件成立返回值 ：不成立返回值
+	 */
+
+	if( a = 0 )
+		a = 10;
+	else
+		a = 20;
+
+	var b = a > 10 ? 5 : 0;
+
+	/**
+	 多分支语法：
+	 ----------------------------------------------
+	 if(条件表达式1)
+	 {
+	 	条件1成立时执行语句;
+	 }
+	 else if(条件表达式2)
+	 {
+	 	条件2成立时执行语句;
+	 }
+	 else if(条件表达式3)
+	 {
+	 	条件3成立时执行语句;
+	 }
+	 else
+	 {
+	 	条件都不成立时执行语句;
+	 }
+
+	 其中 else if 可以存在多个
+	 */
+
+	/**
+	 switch(变量)
+	 {
+	 	case 值1:
+	 	{
+	 		变量==值1 时的执行语句;
+	 		break;
+	 	}
+	 	case 值2:
+	 	{
+	 		变量==值2 时的执行语句;
+	 		break;
+	 	}
+	 	case 值3:
+	 	{
+	 		变量==值3 时的执行语句;
+	 		break;
+	 	}
+	 	default:
+	 	{
+	 		变量不等于以上所有值的时候所执行的语句;
+	 		break;
+	 	}
+	 }
+
+	 case 后面只能是值，不能是条件表达式
+	 程序必须遇到 break 才会跳出 switch 语句，否则会一直往下执行其它分支
+	 */
+	</script>
+
+	<script>
+	// 练习题
+
+	while( true )
+	{
+		var time = parseInt( prompt( "请输入现在的小时：" ) );
+
+		/*
+		 用 if...else if...else 实现以下输出
+
+		 1、若 time>0 且 time<=9 则输出 “good morning”
+		 2、若 time>11 且 time<=13 则输出 “good afternoon”
+		 3、若 time>18 且 time<=20 则输出 “good evening”
+		 4、若 time>20 则输出 “good night”
+		 5、以上范围以外的时间，则输出 “good day”
+		 */
+
+		if( isNaN( time ) )
+		{
+			alert( time );
+			break;
+		}
+
+		if( time > 0 && time <= 9 )
+		{
+			document.write( "good morning" );
+		}
+		else if( time > 11 && time <= 13 )
+		{
+			document.write( "good afternoon" );
+		}
+		else if( time > 18 && time <= 20 )
+		{
+			document.write( "good evening" );
+		}
+		else if( time > 20 )
+		{
+			document.write( "good night" );
+		}
+		else
+		{
+			document.write( "good day" );
+		}
+	}
+	</script>
+
+	<script>
+	/**
+	 for 语法：
+	 -------------------------------------------
+	 for( 初始值 ; 结束条件 ; 值的变化 )
+	 {
+		 重复执行的语句;
+	 }
+
+	 for 括号中的语句称为“循环条件”，而花括号内的语句称为“循环体”
+	 */
+
+	var i = 0;
+
+	for( i = 0; i < 10; i += 2 )
+	{
+		document.write( "*" );
+	}
+
+	document.write( "<p>----------------------------</p>" );
+
+	var arr = [ 10, 20, 30, 40, 50 ];
+
+	for( i = 0; i < arr.length; i++ )
+	{
+		document.write( i + ":" + arr[ i ] + "<br>" );
+	}
+
+	for( var n in arr )
+	{
+		document.write( n + ":" + arr[ n ] + "<br>" );
+	}
+
+	/**
+	 for..in 语法：
+	 -------------------------------------------
+	 for(var 变量 in 对象)
+	 {
+	 	要重复执行的语句;
+	 }
+
+	 主要用来循环遍历对象的属性
+	 */
+
+	var obj = { fname: "John", lname: "Doe", age: 25 };
+	for( var name in obj )
+	{
+		// name 对应对象的属性名
+		// 访问对象属性两种方法：. 运算符，[]括号
+		document.write( name + " = " + obj[ name ] + "<br>" );
+	}
+
+	/**
+	 while 语法：
+	 -------------------------------------------
+	 while(条件表达式)
+	 {
+	 	重复执行的语句;
+	 }
+	 */
+
+	i = 0;
+	while( i < 5 )
+	{
+		document.write( "The number is " + i + "<br>" );
+		i++;
+	}
+
+	/**
+	 结束循环：在循环体中手动调用 break; 语句来终止循环
+	 跳出当前循环：在循环体中手动调用 continue; 语句来结束当前循环
+	 */
+
+	i = 0;
+	while( i < 10 )
+	{
+		// 输出0-10之间的偶数
+		if( i % 2 == 0 )
+			document.write( i + "<br>" );
+		i++;
+	}
+
+	/**
+	 do...while 语法：
+	 -----------------------------------------
+	 do{
+	 	重复执行的语句;
+	 }while(条件表达式)
+
+	 不论条件成立与否，至少都会执行一次。
+	 */
+
+	//1 2 4 8 16
+
+	// 循环嵌套
+	for( var x = 0; x < 5; x++ )
+	{
+		// x=0, 执行5次
+		// x=1, 执行4次
+		// x=2, 执行3次
+		// x=3, 执行2次
+		// x=4, 执行1次
+		// for( var y = 0; y < 5-x; y++ )
+		for( var y = x; y < 5; y++ )
+		{
+			document.write( "*" );
+		}
+		document.write( "<br>" );
+	}
+
+	</script>
+</body>
+</html>

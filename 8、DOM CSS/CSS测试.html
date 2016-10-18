@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS测试</title>
+	<link rel="stylesheet" href="dom.css">
+	<style>
+		div {
+			color: green;
+			width: 300px;
+			background-color: #43a9b0;
+		}
+		.bg-red { background-color: #dd6a63; }
+		.bg-green { background-color: #69b864; }
+		.bg-blue { background-color: #6eb8db; }
+	</style>
+</head>
+<body>
+	<div class="bg-red a b c" style="color:red">
+		CSS测试CSS测试CSS测试
+	</div>
+
+	<script>
+	var div = document.getElementsByTagName( "div" )[ 0 ];
+	console.log( div.style );
+
+	div.style.color = "#99cc00";
+	//div.style.fontSize = "48px";
+	div.style[ "font-size" ] = "48px";
+
+	// float
+	//div.style.float = "right";
+	//div.style.cssFloat = "right";// chrome，IE9以上
+	//div.style.styleFloat = "right";// IE8及以下
+	console.log( div.style.cssFloat, div.style.styleFloat );
+
+	// 取得当前浏览器环境所支持 float 样式属性名称
+	var name = div.style.cssFloat != void(0) ? "cssFloat" : "styleFloat";
+	div.style[ name ] = "right";
+
+	// cssText：浏览器全体看齐
+	div.style.cssText = "width:400px;color:blue;font-size:24px;";
+
+	// 背景颜色
+	var bg = div.style[ "background-color" ];
+	console.log( "background-color:", bg );
+
+	//----------------------------------------------------
+	// className
+	console.log( div.className );
+
+	var cs = [ "bg-red", "bg-green", "bg-blue" ];
+	var index = 1;
+
+	window.setInterval( function()
+	{
+		var ns = div.className;
+
+		// 当类名包含 bg-red 时替换成 bg-green
+		// 当类名包含 bg-green 时替换成 bg-blue
+		// 当类名包含 bg-blue 时替换成 bg-red
+
+		// 当前这一步，要使用的类名
+		var cur = cs[ index ];
+
+		for( var i = 0; i < cs.length; i++ )
+		{
+			if( ns.indexOf( cs[ i ] ) != -1 )
+			{
+				ns = ns.replace( cs[ i ], cur );
+				break;
+			}
+		}
+
+		div.className = ns;
+
+		index++;
+		if( index == 3 ) index = 0;
+
+	}, 41 );
+
+	console.log( "classList:", div.classList );
+
+	</script>
+</body>
+</html>

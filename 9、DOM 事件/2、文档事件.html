@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、文档事件</title>
+</head>
+<body onload="onloadHandler()">
+	<h2>onload</h2>
+	<pre>
+		文档加载完成时，派发事件。
+		文档加载分为两个部分：一是整个文档的HTML结构，二是相关的外部资源的加载。
+	</pre>
+	<img src="http://tupian.enterdesk.com/2015/gha/09/1101/23.jpg" alt="">
+
+	<script>
+	var body = document.body || document.getElementsByTagName( "body" )[ 0 ];
+	body.onbeforeunload = function( event )
+	{
+		return "onbeforeunload...";
+	};
+
+	function onloadHandler()
+	{
+		console.log( "onload completed..." );
+	}
+	</script>
+
+	<h2>onreadystatechange</h2>
+	<pre>
+		只要页面文档结构创建完成，就立即开始使用文档元素，派发此事件。
+		无需等待其它外部资源加载完成。
+	</pre>
+	<script>
+	document.onreadystatechange = function( event )
+	{
+		console.log( event.type, document.readyState );
+	};
+	</script>
+
+	<h2>onunload</h2>
+	<pre>
+		当页面已经关闭，或者刷新时，即指离开页面时会派发此事件。
+
+		若想在页面关闭之前实现自定义检测逻辑，或者阻止页面关闭，则需要使用：
+		onbeforeunload
+	</pre>
+
+</body>
+</html>

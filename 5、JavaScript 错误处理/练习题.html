@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习题</title>
+	<style>
+		.circle {
+			width: 50px;
+			height: 50px;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			border: 2px solid rgba(0, 0, 0, 0.5);
+			background: rgba(67, 169, 176, 0.5);
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<h2>1、计算 1 到 n 内偶数的和【函数形式完成，要设定任何 n 都能成功返回结果】</h2>
+	<script>
+
+	/**
+	 * 统计1至n之间偶数的和
+	 * @param {number} n 目标终值
+	 * @returns {number} 偶数的和
+	 */
+	function sum_even( n )
+	{
+		var result = 0;
+
+		n = parseFloat( n );
+
+		// 2，4，6，8，10
+		for( var i = 2; i <= n; i += 2 )
+		{
+			result += i;
+		}
+
+		return result;
+	}
+
+	console.log( sum_even( "12a" ) );
+	</script>
+
+	<h2>2、写一个函数，传入任何 Object 类型参数，
+		能输出其中所有“数值类型”的参数名及参数值，并将所有数值组成数组返回。
+	</h2>
+	<script>
+	var info = { name: "student", age: 20, uid: 10 };
+
+	/**
+	 * 输出指定对象中数值类型的属性数据
+	 * @param {Object} data 数据源
+	 * @returns {Array} 数值数据数组。若参数为非Object类型，则返回 null
+	 */
+	function getDigit( data )
+	{
+		if( typeof data != "object" || data.toString() != "[object Object]" )
+			return null;
+
+		var a = [];
+
+		// 拿出 参数 data 中数值类型的属性数据
+		for( var ns in data )
+		{
+			if( typeof data[ ns ] == "number" )
+			{
+				console.log( ns, data[ ns ] );
+				a.push( data[ ns ] );
+			}
+		}
+
+		return a;
+	}
+
+	//var darr = getDigit( info );
+	var darr = getDigit( new Date() );
+	console.log( darr );
+
+	console.log( "数组：", typeof([]), [].toString() );
+	console.log( "对象：", typeof({}), {}.toString() );
+	console.log( "日期：", typeof(new Date()), new Date().toString() );
+	console.log( "正则：", typeof(new RegExp()), new RegExp().toString() );
+	console.log( "null：", typeof(null) );
+
+	function handler( event )
+	{
+		var evt = event || window.event;
+		console.log( "evt:", evt );
+	}
+	handler( null );
+	</script>
+
+	<h2>3、有数组 [1,99,120,20,36,77,28]
+		写个函数完成若 传入参数 大于 数组元素的和，则输出这个和。
+		否则输出 参数与数组元素中最大值 的和。
+	</h2>
+	<script>
+	// 统计这个数组元素的和
+
+	// 要找出数组中最大的值
+
+	var arr = [ 1, 99, 120, 20, 36, 77, 28 ];
+
+	/**
+	 * 求指定个数数字的和
+	 * @param {number|Array} a 数字1或者数组
+	 * @param {number} b 数字2
+	 * @returns {number}
+	 */
+	function sum( a, b )
+	{
+		var r = 0;
+
+		var src = arguments; // [[1,2,3]]
+
+		if( typeof a == "object" && a instanceof Array )
+		{
+			src = a;
+		}
+
+		for( var i = 0; i < src.length; i++ )
+		{
+			r += src[ i ];
+		}
+
+		return r;
+	}
+	//	sum( 1, 2, 3, 4, 5 );
+	//	sum( [ 1, 2, 3, 4, 5 ] );
+
+	function max( arr )
+	{
+		console.log( this );
+
+		var src = arguments; // [[1,2,3]]
+
+		if( typeof arr == "object" && arr instanceof Array )
+		{
+			src = arr;
+		}
+
+		return Math.max.apply( this, src );
+	}
+	// max(1,2,3)
+	// max([1,2,3])
+	// arguments : 参数列表数组，代表调用时所有传入的参数
+
+	function abc( arr, value )
+	{
+		var _sum = sum( arr );
+		var _max = max( arr );
+
+		console.log( _sum, _max );
+
+		if( value > _sum )
+		{
+			return _sum;
+		}
+		else
+		{
+			return value + _max;
+		}
+	}
+	console.log( abc( arr, 100 ) );
+	</script>
+
+	<h2>4、为字符串类型 String.prototype 扩展方法：
+		统计指定字符串中英文单词的数量。
+	</h2>
+	<script>
+	String.prototype.countWords = function()
+	{
+		//return this.match( /\w+/g ).length;
+
+		var amount = 0;
+		var cur = "";
+		var src = this.trim();
+
+		for( var i = 0; i < src.length; i++ )
+		{
+			var code = src.charCodeAt( i );
+
+			if( code >= 97 && code <= 122
+				||
+				code >= 65 && code <= 90 )
+			{
+				cur += src[ i ];
+			}
+			else
+			{
+				//if( cur != "" ) amount += 1;
+				cur = "";
+				amount += 1;
+			}
+		}
+
+		return amount;
+	};
+
+	var words = " There are moments in life.";
+	var amount = words.countWords();
+	console.log( amount );
+	</script>
+
+	<h2>5、扩展 Math 对象支持 Math.circle_pos(x,y,r,angle) 方法，
+		即已知圆心坐标、半径，求圆心向任意角度向量到圆弧上的交点坐标。
+	</h2>
+	<script>
+	Math.circle_pos = function( x, y, r, angle )
+	{
+		var radian = angle * Math.PI / 180;
+		var cx = x + Math.cos( radian ) * r;
+		var cy = y + Math.sin( radian ) * r;
+
+		return { x: cx, y: cy };
+	};
+
+	console.log( Math.circle_pos( 0, 0, 100, 45 ) );
+
+	for( var i = 0; i < 8; i++ )
+	{
+		document.write( "<div id='c" + i + "' class='circle'></div>" );
+	}
+
+	function reposition( r )
+	{
+		for( var i = 0; i < 8; i++ )
+		{
+			var div = document.getElementById( "c" + i );
+			var pos = Math.circle_pos( 500, 300, r, i * 45 );
+			var new_width = 50 + 5 * i;
+
+			div.style.width = div.style.height = new_width + "px";
+			div.style.left = (pos.x - new_width * 0.5) + "px";
+			div.style.top = (pos.y - new_width * 0.5) + "px";
+		}
+	}
+
+	var rad = 100;
+	var flag = 1;
+
+	window.setInterval( function()
+	{
+		reposition( rad );
+
+		rad += 5 * flag;
+
+		if( rad > 250 || rad < 100 ) flag *= -1;
+	}, 41 );
+
+	</script>
+
+	<h2>6、设计一个函数 sort_pop(type) 实现冒泡排序，
+		type==1 时从大到小排序，否则从小到大排序，禁止使用 Array.sort，必须
+		通过循环实现。
+	</h2>
+	<script>
+
+	/**
+	 * 排序指定数值数组
+	 * @param {Array} src 来源数据数组
+	 * @param {number} [type] 排序的类型（默认为1）。
+	 * type等于1从大到小排序，反之从小到大
+	 */
+	function sort_pop( src, type )
+	{
+		if( type != 1 ) type = -1;
+
+		for( var i = 0; i < src.length - 1; i++ )
+		{
+			for( var j = i + 1; j < src.length; j++ )
+			{
+				var a = src[ i ];
+				var b = src[ j ];
+
+				// sort a-b b-a
+
+				if( a * type < _b * type )
+				//if( ( a - b ) * type <= 0 )
+				{
+					src[ i ] = _b;
+					src[ j ] = a;
+				}
+
+				//src[ i ] = type == 1 ? (a < b ? b : a) : (a > b ? b : a);
+				//src[ j ] = type == 1 ? (a < b ? a : b) : (a > b ? a : b);
+
+				//				if( type == 1 )
+				//				{
+				//					// 从大到小
+				//					if( a < b )// a-b
+				//					{
+				//						src[ i ] = b;
+				//						src[ j ] = a;
+				//					}
+				//				}
+				//				else
+				//				{
+				//					// 从小到大
+				//					if( a > b )// b-a
+				//					{
+				//						src[ i ] = b;
+				//						src[ j ] = a;
+				//					}
+				//				}
+			}
+		}
+	}
+
+	var src = [ 12, 62, 75, 43, 9, 6, 3 ];
+	sort_pop( src, 1 );
+	console.log( src.toString() );
+	sort_pop( src, 0 );
+	console.log( src.toString() );
+	</script>
+
+	<h2>7、日期模板函数</h2>
+	<script>
+	/**
+	 * 将日期格式化成指定格式
+	 * <p>如将日期输出成 "2016-08-28"</p>
+	 *
+	 * <p>类型列表：</p>
+	 * <ol>
+	 *     <li>Y：年份（2016）</li>
+	 *     <li>y：年份（16）</li>
+	 *     <li>m：月份（从01至12）</li>
+	 *     <li>n：月份，不带前导0（从1至12）</li>
+	 *     <li>j：一个月的第几天（从1至31）</li>
+	 *     <li>d：一个月的第几天（从01至31）</li>
+	 *
+	 *     <li>G：小时数，24小时制，没有前导0（从0至23）</li>
+	 *     <li>H：小时数，24小时制（从00至23）</li>
+	 *     <li>g：小时数，12小时制，没有前导0（从0至12）</li>
+	 *     <li>h：小时数，12小时制（从00至12）</li>
+	 *
+	 *     <li>i：分钟数（从00至59）</li>
+	 *     <li>s：秒钟数（从00至59）</li>
+	 *
+	 *     <li>w：星期几的数字表示（0表示星期日[Sunday]，6表示星期六[Saturday]）</li>
+	 *     <li>W：星期的英文表示（0表示 Sunday，6表示 Saturday）</li>
+	 * </ol>
+	 *
+	 * @param {string} type 输出内容格式：如 Y-m-d H:i:s
+	 * @param {Date|number} [date] 既可以是日期对象，也可以是自 1970年1月1日0时 以来的秒数（时间戳）
+	 * @returns {string}
+	 */
+	function fdate( type, date )
+	{
+		if( typeof date != "object" || !(date instanceof Date ) )
+			date = new Date();
+		else if( typeof date == "number" )
+			date = new Date( date * 1000 );
+
+		var Y = date.getFullYear();
+		var y = (Y + "").substr( 2, 2 );
+
+		var n = date.getMonth() + 1;// 从0开始
+		var m = ("0" + n).substr( -2, 2 );
+
+		var j = date.getDate();
+		var d = ("0" + j).substr( -2, 2 );
+
+		var G = date.getHours();// 24小时制的小时，无前导0
+		var H = ("0" + G).substr( -2, 2 );
+		var g = G % 12;
+		var h = ("0" + g).substr( -2, 2 );
+
+		var i = date.getMinutes();
+		var s = date.getSeconds();
+
+		var _w = date.getDay();//0-6
+		var w = Date.WEEK_CNAME[ _w ];
+		var W = Date.WEEK_ENAME[ _w ];
+
+		var a = G < 12 ? "AM" : "PM";// 上午：am 下午：pm
+		var A = G < 12 ? "上午" : "下午";// 上午：AM 下午：PM
+
+		// type = "Y-m-d H:i:s";
+		var r = type.replace( /[Y]/g, Y );
+		r = r.replace( /[y]/g, y );
+		r = r.replace( /[m]/g, m );
+		r = r.replace( /[n]/g, n );
+		r = r.replace( /[j]/g, j );
+		r = r.replace( /[d]/g, d );
+
+		r = r.replace( /[G]/g, G );
+		r = r.replace( /[H]/g, H );
+		r = r.replace( /[g]/g, g );
+		r = r.replace( /[h]/g, h );
+
+		r = r.replace( /[i]/g, i );
+		r = r.replace( /[s]/g, s );
+
+		r = r.replace( /[A]/g, A );
+		r = r.replace( /[a]/g, a );
+
+		r = r.replace( /[w]/g, w );
+		r = r.replace( /[W]/g, W );
+
+		return r;
+	}
+
+	Date.WEEK_CNAME = [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ];
+
+	Date.WEEK_ENAME = [
+		"Sunday",// 星期日
+		"Monday",// 星期一
+		"Tuesday",// 星期二
+		"Wednesday",// 星期三
+		"Thursday",// 星期四
+		"Friday",// 星期五
+		"Saturday" // 星期六
+	];
+
+	console.log( fdate( "Y-m-d H:i:s" ) );
+	</script>
+
+	<h2>字符串模板函数</h2>
+	<script>
+	/**
+	 * 字符串模板函数
+	 * @param {string} content 包含 {} 标记的内容，{} 部分将被数据替代
+	 * @param {*|Array} args 数据列表或者数组
+	 */
+	function printf( content, args )
+	{
+		if( args == undefined )return content;
+
+		var pp = content.match( /\{\w+\}/g );
+		//console.log( pp );
+
+		var src = arguments;
+		if( typeof args == "object" && args instanceof Array )
+		{
+			src = args;
+		}
+
+		for( var i = 0; i < pp.length; i++ )
+		{
+			//console.log( pp[ i ], src[ i ] );
+			var sign = pp[ i ];
+			var data = src[ i + 1 ];
+
+			content = content.replace( sign, data );
+		}
+
+		return content;
+	}
+
+	var animal = "胖的";
+	console.log( printf( "you are a {a} {b} {c}!", "胖子", "又肥", "又重" ) );
+	// you are a 胖的肥的慢的!
+	// printf( "data is:{a} {b} {c}", 1,2,3 );
+	// printf( "data is:{1} {2} {3}", [1,2,3] );
+	</script>
+
+</body>
+</html>

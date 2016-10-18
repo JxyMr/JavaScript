@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5、常用事件</title>
+</head>
+<body>
+	<h2>键盘事件</h2>
+	<pre>
+		keydown - 键盘按键按下时
+		keyup - 按下按键松开时
+		keypress - 在keyup之前会有重复派发，它关注的不是键盘操作，而是输入内容
+		textInput - 当有内容输入时派发。键盘、复制粘贴、剪切、拖放、手写笔、语音
+		输入等
+	</pre>
+
+	<h2>鼠标事件</h2>
+	<pre>
+		click - 单击
+		dblclick - 双击
+		mousedown - 当鼠标按键按下时
+		mouseup - 当鼠标按下的按键松开时
+
+		contextMenu - 上下文菜单事件（右击）
+
+		mouseover和mouseout
+		鼠标进入和离开，若目标元素中有子元素，进入和离开子元素会重复派发
+
+		mouseenter和mouseleave
+		鼠标进入和离开，但是忽略所有子元素的进入和离开
+
+		mousewheel - 鼠标滚轮滚动事件（wheel，在Firefox中使用 DOMMouseScroll）
+	</pre>
+
+	<h2>表单事件</h2>
+	<pre>
+		表单提交时派发 submit
+
+		在表单数据重置（一般点击重置reset按钮时）会派发 reset 事件
+
+		按钮被点击时派发 click
+
+		当表单域控件切换焦点（当前操作的目标元素）时，在得到和失去焦点时会分别
+		派发 focus 和 blur事件 （在IE中使用 focusin 和 focusout）
+
+		当文本框输入文字、下拉框或者选择框选项改变时会派发 change 事件
+		（但必须焦点离开时才会派发一次）
+	</pre>
+
+</body>
+</html>

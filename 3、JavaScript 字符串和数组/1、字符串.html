@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、字符串</title>
+</head>
+<body>
+	<h2>什么是字符串？</h2>
+	<pre>
+		在JavaScript中用引号包含的文本内容称为字符串。
+	</pre>
+
+	<h2>创建字符串</h2>
+	<script>
+	var str1 = "string";
+	var str2 = 'string';
+
+	var str3 = "<p class=\"color:#cc0000\">段落内容</p>";
+	var str4 = "<p class='color:#cc0000'>段落内容</p>";
+
+	// 以上方式创建出来的结果：是字符串类型的“值”，而非“对象”
+
+	var str5 = new String( "string" );// 字符串内容的对象
+
+	// typeof 的结果不同：
+	// str1,2,3,4返回 "string"，而str5返回 "object"
+	</script>
+
+	<h2>字符串比较是否相等</h2>
+	<script>
+	// 直接使用比较运算符 == 进行比较
+	console.log( str1 == str2 );
+	</script>
+
+	<h2>字符串大小写转换</h2>
+	<script>
+	var a = "Hanzhou";
+	var b = "HanZhou";
+	// JavaScript 中区分大小写，不论标识符还是字符串内容
+	// a.toLowerCase() - 将字母全部转换成小写
+	// a.toUpperCase() - 将字母全部转换成大写
+
+	console.log( a, _b, a.toLowerCase() == _b.toLowerCase() );
+	</script>
+
+	<h2>字符串的数组特性和长度</h2>
+	<script>
+	for( var i = 0; i < a.length; i++ )
+	{
+		console.log( a[ i ], a.charAt( i ) );
+	}
+	</script>
+
+	<h2>Unicode 编码和字符相互转换</h2>
+	<pre>
+		charCodeAt(下标)
+		返回字符串指定位置的字符的 unicode 编码，这个值是 0~65535 之间的整数
+
+		fromCharCode(Unicode编码)
+		将 unicode 编码转换为字符
+	</pre>
+	<script>
+	console.log( "张".charCodeAt( 0 ), String.fromCharCode( 21941 ) );
+
+	for( var i = 0; i < 26; i++ )
+	{
+		console.log( String.fromCharCode( 65 + i ) );
+	}
+	</script>
+
+	<h2>字符串截取</h2>
+	<pre>
+		substr(start,[length])
+		抽取字符串中 start 下标开始的指定个数的子字符串
+		start 		开始下标。可以为负数，-1代表最后一个字符，-2指倒数第二个字符
+		length 		截取个数，若省略该参数，将一直到字符串末尾截止
+
+		substring(start,[end])
+		抽取字符串中指定 start 下标和 end 下标之间的字符，不包含end下标处的字符
+		start 		非负整数，开始下标
+		end 		非负整数，结束下标，不包含此位置字符。若省略则一直到结尾
+	</pre>
+	<script>
+	var ss = "012345678";
+	console.log( ss.substr( 2, 2 ) );// 23
+	console.log( ss.substring( 2, 3 ) );// 2
+	console.log( ss.substring( 5 ) );// 5678
+
+	console.log( ss.indexOf( "5" ) );
+	console.log( ss.lastIndexOf( "2" ) );
+
+	ss = ss.replace( "2", "2B" );
+	var a = ss.replace( "2", "2B" );// 返回新字符串，不影响原字符串
+	console.log( a, a.length, ss, ss.length );
+	</script>
+
+	<h2>字符串查找</h2>
+	<pre>
+		indexOf(子字符串,start)
+		lastIndexOf(子字符串,start)
+
+		找出来的结果都是TMD从左边数起的
+	</pre>
+
+	<h2>字符串替换</h2>
+	<pre>
+		replace(查找内容，替换内容，开始查找下标)
+	</pre>
+
+	<h2>字符串分割成数组</h2>
+	<pre>
+		字符串.split(分隔符)
+	</pre>
+	<script>
+	var words = "red,green,blue";
+	var arr = words.split( "," );
+	console.log( arr );
+	console.log( words.split( "" ) );
+
+	console.log( arr.join( " " ) );
+	</script>
+
+	<h2>数组合并成字符串</h2>
+	<pre>
+		将指定数组的所有元素用指定的分隔符相连，返回新字符串，不影响原数组。
+		Array.join("分隔符");
+	</pre>
+
+</body>
+</html>

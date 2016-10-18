@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、JSON</title>
+	<!--[if lt IE 9]>
+	<script src="../static/comp/html5shiv.min.js"></script>
+	<script src="../static/comp/respond.min.js"></script>
+	<script src="../static/comp/json.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<h2>JSON</h2>
+	<pre>
+		简单值
+		与JavaScript类似，在JSON中也同样可以使用“字符串、数值、布尔值、null”
+		但是没有“undefined”，而且JSON中的字符串只能且必须使用双引号。
+
+		对象
+		在JavaScript中对象和JSON中对象一样，但是JSON对象属性名必须加双引号，
+		使用单引号或者没加引号都会导致语法错误，继而解析失败。
+		var js = {name:"张三", sex:"男"};
+		var json = '{"name":"张三", "sex":"男"}';
+
+		数组
+		JSON数组和JavaScript数组字面量表现方法一致，通过方括号来表示
+
+		new
+		1 2 3
+		"asdfadf"
+		true false
+		{} []
+	</pre>
+	<script>
+	var css = { "background-color": "#99cc00", "font-size": "24px" };// Object
+	var json = '{ "background-color": "#99cc00" }';// String
+
+	// eval(字符串)
+	// 将参数字符串，当成代码来执行。
+	// 参数中字符串，可以包含任意JavaScript表达式和代码。
+
+	var a = eval( "3+2" );// 3+2
+	console.log( "3+2=", a );
+
+	a = eval( "var x=3,y=5;x*y" );
+	console.log( "x*y=", a );
+
+	//console.log( eval( json ) );
+
+	// 解析 JSON 结构字符串
+	var obj = JSON.parse( json );
+	console.log( obj );
+
+	// 序列化JavaScript对象
+	console.log( JSON.stringify( css ) );
+	</script>
+</body>
+</html>

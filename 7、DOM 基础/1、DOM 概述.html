@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、DOM 概述</title>
+</head>
+<body>
+	<h2>概述</h2>
+	<pre>
+		JavaScript 是让静态HTML网页“动起来”的脚本程序语言。
+
+		“动起来”有两层意思：
+		* 其一，让页面中的标签元素实现动态、动画
+		* 其二，能够响应用户的操作、响应事件
+
+		DOM核心目的在于，能够将整个HTML文档的层级关系映射成JavaScript
+		的代码结构，以此来进行查找和修改。
+
+		浏览器中的每个窗口都对应一个JavaScript中的Window对象，每个Window
+		对象都包含一个 document 属性，其对应整个HTML文档，表示整个窗口下的
+		网页内容。
+
+		这个用JavaScript中的对象（Object）所表示的HTML文档结构，就是DOM，
+		全称“文档对象模型（Document Object Model）”，其结构表现的像一颗树，
+		所以我们也称为“文档树”，它用来表示和操作整个文档的内容。
+
+	</pre>
+
+	<h2>要学习的DOM内容</h2>
+	<ol>
+		<li>如何在文档中查找元素</li>
+		<li>如何遍历文档树，查找任何文档元素的祖先、兄弟、后代元素</li>
+		<li>如何读写元素属性和样式</li>
+		<li>如何修改元素的内容</li>
+		<li>如何创建、插入、删除文档元素</li>
+		<li>表单元素的操作</li>
+	</ol>
+
+	<h2>文档对象模型（DOM）</h2>
+	<pre>
+		文档对象模型包含所有的HTML元素、以及所有的文本字符串、甚至包含HTML注释、
+		空白字符。
+
+		<!--
+		<html>
+		<head>
+			<title>DOM 文档树</title>
+		</head>
+
+		<body>
+			<h1>文档标题</h1>
+			<p style="color:#000;">文档内容</p>
+		</body>
+		</html>
+		-->
+	</pre>
+
+	<!--这是注释，你信吗？-->
+	<h2>DOM节点类型</h2>
+	<pre>
+		DOM树的节点有两种类型：
+		其一，包含所有的标签、文本、注释、空白字符的类型，用“节点类型（Node）”表示
+		其二，只包含所有的标签的类型，用“元素类型（Element）”表示
+	</pre>
+
+	<h2>选取文档元素</h2>
+	<pre>
+		1、通过 ID 选取元素
+		[Element] document.getElementById( [string] elementId )
+
+		2、通过名字（name）选取元素
+		[NodeList] document.getElementsByName( [string] elementName )
+		NodeList - 类似于数组的节点列表，包含所有符合要求的 元素
+					并且这个列表是“只读”类型的数据
+
+		不论标签元素位置在哪，嵌套关系有多深，只要名字匹配都会被选取。
+
+		3、通过标签名选取元素
+		[NodeList] document.getElementsByTagName( [string] tagName )
+
+		4、通过CSS类选取元素
+		[NodeList] document.getElementsByClassName( [string] className )
+
+		5、通过CSS选择器选取元素
+		* 类选择器，ID选择器，标签选择器
+		* 属性选择器 input[type='text']
+		* 层级选择器 祖先、父级、子级、后代、同辈
+
+		[Element] document.querySelector( [string] selector )
+		[NodeList] document.querySelectorAll( [string] selector )
+	</pre>
+
+
+
+</body>
+</html>

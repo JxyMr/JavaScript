@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件测试</title>
+</head>
+<body>
+	<input type="button" onclick="console.log(this.value)" value="INPUT:测试按钮">
+	<button onclick="console.log(this.innerText)">BUTTON:测试按钮</button>
+
+	<button>在JavaScript中添加事件监听</button>
+
+	<script>
+	var btn = document.getElementsByTagName( "button" )[ 1 ];
+	var count = 0;
+
+	btn.onclick = function( event )
+	{
+		console.log( "onclcik...", count );
+
+		count++;
+
+		if( count == 5 )
+		{
+			btn.onclick = null;
+		}
+	};
+
+	btn.ondblclick = dblClickHandler;
+	function dblClickHandler( event )
+	{
+		console.log( "dblclick..." );
+	}
+
+	// -----------------------------------------------
+	// 通过addEventListener添加事件监听，事件类型前不要再有 on
+	if( btn.addEventListener )
+	{
+		btn.addEventListener( "mouseover", function( event )
+		{
+			console.log( event.currentTarget );
+
+			// this == event.currentTarget == btn
+			this.style.backgroundColor = "#000000";
+			this.style.color = "#ffffff";
+
+			// arguments.callee 指向当前函数本身
+			// 在匿名函数中尤其重要
+			btn.removeEventListener( "mouseover", arguments.callee );
+		} );
+	}
+	else
+	{
+		// 在IE8及以下的版本浏览器中，事件类型前同样需要加上 “on”
+		btn.attachEvent( "onmouseover", function( event )
+		{
+			console.log( event.srcElement );
+			// this == window
+			// event.srcElement == btn
+			// event.srcElement 此属性代表当前事件目标，
+			// 在 Firefox 、IE8及以下支持
+			// 在 IE9 及以上使用 event.currentTarget
+			event.srcElement.style.backgroundColor = "#000000";
+			event.srcElement.style.color = "#ffffff";
+		} );
+	}
+
+	</script>
+</body>
+</html>

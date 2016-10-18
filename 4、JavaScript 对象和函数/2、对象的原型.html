@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、对象的原型</title>
+</head>
+<body>
+	<h2>对象的原型（Prototype）</h2>
+	<h2>类型</h2>
+	<pre>
+		JavaScript是基于类型（type）开始的，分为两个大类：原生类型和对象类型
+		原生类型：Number、String、Boolean、Null、Undefined
+		对象类型：Object、Array、Function
+
+		Object、Array、Null 使用 typeof 得出结果："object"
+		进一步得到对象的类型，使用 toString() 来检测
+	</pre>
+	<script>
+	var a = { a: 1 };
+	var b = new Array( 2 );
+
+	console.log( a.toString() );
+
+	var c = "[object Object]";
+	var d = "[object Array]";
+
+	var ss = c.split( " " )[ 1 ];
+	console.log( ss.substring( 0, ss.length - 1 ) );
+
+	console.log( c.substring( c.indexOf( " " ) + 1, c.length - 1 ) );
+	</script>
+
+	<h2>prototype</h2>
+	<pre>
+		类型才有prototype属性（Number、String、Date）
+		实例没有prototype属性（1,"str",new Date()）
+	</pre>
+	<script>
+	console.log( Number.prototype );
+	console.log( String.prototype );
+	console.log( Date.prototype );
+	</script>
+
+	<h2>原型的扩展</h2>
+	<pre>
+		目的在于给所有新创建的实例，赋予新的方法和属性。
+	</pre>
+
+	<script>
+	Number.prototype.toFloat = function( length )
+	{
+		// 函数若没有任何返回值，则默认为 undefined
+		//console.log( "TMD:", this );
+
+		// 扩展原型时，内部 this 指向调用该方法的数据对象
+		var n = this;
+		var m = 10 * length;
+
+		return parseInt( n * m ) / m;
+	};
+
+	var a1 = 250.25522;
+	console.log( a1.toFloat( 2 ) );
+
+	// 扩展 String.prototype 实现将字符串字符反转
+	var str = "perfect!"; // !tcefrep
+	String.prototype.reverse = function()
+	{
+		return this.split( "" ).reverse().join( "" );
+	};
+	console.log( str.reverse() );
+	</script>
+
+</body>
+</html>

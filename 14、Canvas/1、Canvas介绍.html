@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas介绍</title>
+</head>
+<body>
+	<h2>介绍</h2>
+	<pre>
+		Canvas 是一个HTML元素，通常我们称之为“画布”。
+		它自身没有任何绘制能力，但却提供一套绘制API，给JavaScript语言在客户端
+		浏览器环境中进行 线条、形状、图像、文本的绘制。
+
+		Canvas元素需要设置width和height来规定“画布”的大小。其意义在于在
+		“网页”中定义一块区域，然后通过JavaScript动态的进行绘制。
+
+		浏览器兼容：除了IE8及以下版本浏览器不支持，其它主流浏览器都支持。
+	</pre>
+
+	<h2>全屏自适应画布</h2>
+	<pre>
+		首先，Canvas的canvas.style.width和canvas.width是两个完全不同的概念。
+		canvas.style.width   - 样式
+		canvas.width 		 - 属性
+
+		1、将 style.width和style.height 在CSS样式表中设置为 100%（标签上设置无效）
+		2、用JavaScript获取window的宽高设置给canvas的width和height属性
+		3、在浏览器窗口缩放时侦听resize事件，重复执行第2步
+
+		默认绘制 》窗口缩放 》缩放画布 》清除画布 》重新绘制所有内容
+	</pre>
+
+
+</body>
+</html>

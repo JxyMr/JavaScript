@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习题</title>
+	<style>
+
+		body, ul, li {
+			margin: 0;
+			padding: 0;
+		}
+		.date-row {
+			overflow: hidden;
+		}
+		.date-row li {
+			float: left;
+			width: 40px;
+			height: 30px;
+			border: 1px solid #999999;
+			list-style: none;
+			text-align: center;
+			line-height: 30px;
+		}
+		/*非本月的日*/
+		.day-nocur {
+			color: #cccccc;
+		}
+		/*今天*/
+		.day-cur {
+			font-weight: bold;
+			color: #00cc99;
+		}
+	</style>
+</head>
+<body>
+	<h2>通过日期对象Date实现本月（当前月，不能固定）的日历列表。</h2>
+	<script>
+	// 7 列 6 行：包含星期标题，日期
+
+	// 1、使用 table
+	// 2、使用 ul 作为行，li 作为列
+
+	var html = "";
+
+	var today = new Date();
+
+	// 第一步：求出第一个格子的时间戳
+	//-----------------------------------------------------------
+	// 求出当月 1 号的时间戳
+	var first = today.getTime() - ( today.getDate() - 1) * 86400000;
+
+	// 求出本周第 0 天的时间戳（即周日）
+	first = first - new Date( first ).getDay() * 86400000;
+
+	//	var tmp = new Date( first );
+	//	console.log( tmp.getFullYear(), tmp.getMonth() + 1, tmp.getDate() );
+
+	var dt = new Date();
+
+	for( var i = 0; i < 5; i++ )
+	{
+		// 行
+		html += "<ul class='date-row'>";
+
+		for( var j = 0; j < 7; j++ )
+		{
+			// 列。。。
+			// 第二步：每次循环递增86400秒
+			var time = first + 86400000 * (i * 7 + j);
+			dt.setTime( time );
+
+			var cls = "";
+
+			if( today.getTime() == time )
+			{
+				// 这TM就是今天
+				cls = " class='day-cur'";
+			}
+
+			if( today.getMonth() != dt.getMonth() )
+			{
+				// 这TM不是这个月
+				cls = " class='day-nocur'";
+			}
+
+			html += "<li" + cls + ">" + dt.getDate() + "</li>";
+		}
+
+		html += "</ul>";
+	}
+
+	document.write( html );
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、CSS 概述</title>
+</head>
+<body>
+	<h2>CSS 概览</h2>
+	<pre>
+		CSS 全称“层叠样式表（Cascading Style Sheet）”，其主要目的用来指定
+		HTML 文档元素的视觉表现。
+
+		字体、颜色、内边距padding、外边距margin、边框border、背景颜色和图片、
+		文本对齐方式text-align、line-height、元素尺寸、位置等
+
+		position: fixed;
+		left、top、right、bottom
+
+		1、内联样式
+		给文档元素单独设置style属性来设置的样式，称为内联样式。
+
+		2、style标签样式
+		一般某个页面中需要重复使用的样式，将样式独立到 style 标签中，而不是文本中，
+		它的关注点仅限于当前工作的文档，而不是多个文档。
+
+		3、link链接样式
+		当同样的样式需要在多个HTML文件中重复使用时，将这些样式独立到CSS文件中，来
+		加载到需要使用的HTML文档中。
+		要使用这些外部样式，直接用 link 标签来指定要加载的样式文件。
+	</pre>
+
+	<h2>层叠样式的优先级</h2>
+	<pre>
+		CSS释义中层叠指的就是各个不同位置的相同元素的样式会发生“覆盖”、叠加、合并，
+		以取得最终的样式效果。
+
+		优先级由高到低的顺序为：
+		* 元素的 style 属性（行内样式）
+		* 文档中的 style 标签
+		* 外部样式文件
+	</pre>
+
+
+</body>
+</html>

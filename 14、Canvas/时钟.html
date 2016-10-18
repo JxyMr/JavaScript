@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="800" height="600"></canvas>
+	<script>
+	var c = document.getElementById( "myCanvas" );
+	var ctx = c.getContext( "2d" );
+
+	//-------------------------------------------------
+	ctx.lineWidth = 10;
+	ctx.strokeStyle = "#666666";
+	ctx.fillStyle = "#20B9DF";
+
+	ctx.beginPath();
+	ctx.arc( 400, 300, 200, 0, 2 * Math.PI );
+	ctx.closePath();
+
+	ctx.fill();
+	ctx.stroke();
+	//-------------------------------------------------
+	ctx.strokeStyle = "#cccccc";
+	ctx.fillStyle = "#eeeeee";
+
+	ctx.beginPath();
+	ctx.arc( 400, 300, 150, 0, 2 * Math.PI );
+	ctx.closePath();
+
+	ctx.fill();
+	ctx.stroke();
+	//-------------------------------------------------
+
+	ctx.fillStyle = "#333333";
+	ctx.strokeStyle = "#333333";
+	ctx.font = "24px Microsoft Yahei";
+	ctx.beginPath();
+
+	var tm;
+
+	// 画12点
+	ctx.moveTo( 400, 160 );
+	ctx.lineTo( 400, 180 );
+	tm = ctx.measureText( "12" );
+	ctx.fillText( "12", 400 - tm.width / 2, 210 );
+
+	// 画3点
+	ctx.moveTo( 540, 300 );
+	ctx.lineTo( 520, 300 );
+	ctx.fillText( "3", 500, 310 );
+
+	// 画6点
+	ctx.moveTo( 400, 440 );
+	ctx.lineTo( 400, 420 );
+	tm = ctx.measureText( "6" );
+	ctx.fillText( "6", 400 - tm.width / 2, 410 );
+
+	// 画9点
+	ctx.moveTo( 260, 300 );
+	ctx.lineTo( 280, 300 );
+	ctx.fillText( "9", 290, 310 );
+	//-------------------------------------------------
+
+	ctx.stroke();
+	ctx.closePath();
+
+	//-------------------------------------------------
+	// 将图片画到时钟的正中心
+	var img = new Image();
+	img.src = "gj.png";
+	img.onload = function()
+	{
+		ctx.drawImage( img, 300, 240 );
+	};
+
+	var sprite = new Image();
+	sprite.src = "sprite.png";
+	sprite.onload = function()
+	{
+		ctx.drawImage( sprite, 10, 10 );
+		ctx.drawImage( sprite, 103, 0, 103, 103, 113, 123, 103, 103 );
+		ctx.drawImage( sprite, 206, 0, 103, 103, 113, 226, 103, 103 );
+
+		ctx.save();
+		ctx.translate( 10, 300 );
+		ctx.rotate( 0.3 * Math.PI );
+		ctx.drawImage( sprite, 309, 0, 103, 103, 0, 0, 103, 103 );
+
+		ctx.restore();
+		ctx.drawImage( sprite, 309, 0, 103, 103, 0, 0, 103, 103 );
+
+		// 开始播放
+		drawUpdate();
+	};
+
+	// 时间驱动（1000/60 FPS）
+	window.setInterval( drawUpdate, 83 );
+
+	var frame = 0;
+
+	// 绘制逻辑
+	function drawUpdate()
+	{
+		// 清除矩形区域
+		ctx.clearRect( 10, 113, 103, 103 );
+
+		// 重新绘制
+		ctx.drawImage( sprite, (frame % 6) * 103, 0, 103, 103, 10, 113, 103, 103 );
+
+		// 帧自加
+		frame++;
+	}
+
+	</script>
+</body>
+</html>

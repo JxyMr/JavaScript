@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>6、3D转换</title>
+	<style>
+		html, body {
+			height: 100%;
+		}
+		body {
+			perspective: 1920px;
+			-webkit-perspective: 1920px;
+			-moz-perspective: 1920px;
+		}
+		.rotate {
+			width: 200px;
+			height: 200px;
+			background-color: #6eb8db;
+			-webkit-transition: all 1s ease-in;
+			-moz-transition: all 1s ease-in;
+			-o-transition: all 1s ease-in;
+			transition: all 1s ease-in;
+		}
+		.rotate:hover {
+			-webkit-transform: translateZ(-2000px);
+			-moz-transform: translateZ(-2000px);
+			-o-transform: translateZ(-2000px);
+			transform: translateZ(-2000px);
+		}
+	</style>
+</head>
+<body>
+	<h2>3D变换轴心</h2>
+	<pre>
+		以面对屏幕而言，
+		x - 屏幕从左至右的横轴
+		y - 屏幕从上往下的纵轴
+		z - 从屏幕外往里垂直于屏幕的轴
+
+		3D的透视
+		* 在父级容器设置
+			div.stage{
+				perspective: 1920px;
+				-webkit-perspective: 1920px;
+			}
+
+		* 没有父容器的情况下，在自身的动画属性前使用函数声明：
+			transform: perspective(1920px) translateZ(1920px);
+
+
+		变换的圆点
+		属性设置：transform-origin: x y z;
+		可以使用的值：
+		x 		left、center、right、px、%
+		y 		top、center、bottom、px、%
+		z 		px
+		默认值：transform-origin:50% 50% 0;
+
+
+		位置的3D平移
+		translateX()、translateY()
+		translateZ()	正数向屏幕外靠近（变大）、负数向屏幕内靠近（元素变小）
+		translate3d(x,y,z)
+		警告：屏幕往里面是Z轴负方向，往外面是正方向。
+
+		角度的3D空间旋转
+		rotateX(deg)
+		rotateY(deg)
+		rotateZ(deg)
+	</pre>
+
+	<div class="rotate"></div>
+
+</body>
+</html>

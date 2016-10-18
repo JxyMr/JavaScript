@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选取元素</title>
+	<style>
+		.red {
+			color: indianred;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<ul class="red">
+			<li class="red">第一行</li>
+			<li>第二行</li>
+			<li>第三行</li>
+		</ul>
+		<form action="">
+			<label class="red">
+				<input type="radio" name="sex" value="0"> 女
+			</label>
+			<label>
+				<input type="radio" name="sex" value="1"> 男
+			</label>
+		</form>
+	</div>
+	<script>
+	var div = document.getElementById( "container" );
+	console.log( div, div.toString() );
+
+	var sex = document.getElementsByName( "sex" );
+	console.log( sex, sex.toString() );
+
+	var ul = div.getElementsByTagName( "ul" );
+	console.log( ul[ 0 ] );
+
+	var lis = ul[ 0 ].getElementsByTagName( "li" );
+	var lis2 = document.querySelectorAll( "#container > ul > li" );
+	console.log( "LI:", lis, lis2 );
+
+	var red = document.getElementsByClassName( "red" );
+	console.log( red );
+
+	// ----------------------------------------------------
+
+	var first = document.childNodes[ 1 ];
+	var first2 = document.firstChild;
+
+	console.log( first.nodeType, first2.nodeType );
+
+	var head = first.firstChild;// first.childNodes[ 0 ]
+	var body = first.lastChild;// first.childNodes[ 1 ]
+
+	console.log( head, body );
+	console.log( head.nodeType, body.nodeType );
+
+	var style = head.lastChild;
+	console.log( style, style.nodeType, style.childNodes );
+
+	// 遍历节点
+	//	function loopElements( el )
+	//	{
+	//		if( el == void(0) ) el = document;
+	//
+	//		var cn = el.childNodes;
+	//		var size = cn.length;
+	//
+	//		for( var i = 0; i < size; i++ )
+	//		{
+	//			var node = cn[ i ];
+	//
+	//			if( node.hasChildNodes() )
+	//			{
+	//				loopElements( node );
+	//			}
+	//			else
+	//			{
+	//				console.log( node.nodeName + ":" + node.nodeValue );
+	//			}
+	//		}
+	//	}
+
+	// 遍历元素
+	function loopElements( el, sp )
+	{
+		if( el == void(0) ) el = document;
+
+		var html = el.children;
+		var size = html.length;
+
+		for( var i = 0; i < size; i++ )
+		{
+			var element = html[ i ];
+
+			if( element.children.length > 0 )
+			{
+				console.log( sp + element.tagName );
+				loopElements( element, sp + "——" );
+			}
+			else
+			{
+				console.log( sp + element.tagName );
+			}
+		}
+	}
+
+	loopElements( document, "" );
+	</script>
+</body>
+</html>

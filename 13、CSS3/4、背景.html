@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4、背景</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		html, body {
+			height: 100%;
+		}
+		.game-stage {
+			height: 100%;
+			/*background-color: #88d5d5;*/
+			background: url("logo.png") no-repeat 95% 95%, url("bg.png") no-repeat;
+			background-size: auto auto, 100% 100%;
+		}
+		.msgbox {
+			border: 10px solid rgba(255, 255, 255, 0.5);
+			background-clip: padding-box;
+			width: 400px;
+			height: 300px;
+			position: absolute;
+			left: calc(50% - 200px);
+			top: calc(50% - 150px);
+			padding: 50px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			background: linear-gradient(360deg, #ffffff, #6eb8db);
+		}
+	</style>
+
+</head>
+<body>
+	<div class="game-stage"></div>
+
+	<div class="msgbox">嫌弃92348这虑3245最</div>
+</body>
+</html>

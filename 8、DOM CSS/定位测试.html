@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定位测试</title>
+	<style>
+		.container {
+			position: relative;
+			border: 2px solid #333333;
+			width: 400px;
+			height: 100px;
+			float: left;
+			overflow: hidden;
+		}
+		.child {
+			position: absolute;
+			width: 200px;
+			height: 100px;
+			background-color: rgba(67, 169, 176, 0.5);
+		}
+		.child:nth-child(1) { }
+		.child:nth-child(2) { left: 180px; }
+		.child:nth-child(3) { left: 360px; }
+	</style>
+</head>
+<body>
+	<!--在relative中嵌套absolute-->
+	<div class="container">
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+	</div>
+	<div id="container" class="container">
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+	</div>
+	<div class="container">
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+	</div>
+
+	<script>
+	const fps = 20;
+	//window.setInterval( next, 20 );
+
+	function next()
+	{
+		console.log( "..." );
+	}
+
+	Element.prototype.move = function( x, y, time )
+	{
+		var el = this;
+
+		el.setAttribute( "data-sx", el.offsetLeft );
+		el.setAttribute( "data-sy", el.offsetTop );
+
+		el.setAttribute( "data-tx", x );
+		el.setAttribute( "data-ty", y );
+
+		var elapsedTime = 0;
+		var angle = Math.abs( y - el.offsetTop ) / Math.abs( x - el.offsetLeft );
+
+		var timer = window.setInterval( function()
+		{
+			var factor = elapsedTime / time;
+			var startX = parseInt( el.getAttribute( "data-sx" ) );
+			var startY = parseInt( el.getAttribute( "data-sy" ) );
+
+			var left = x - startX;
+			left = left * factor;
+			var top = y - startY;
+			top = top * factor;
+
+			el.style.left = left + "px";
+			el.style.top = top + "px";
+
+			elapsedTime += fps;
+
+			if( elapsedTime >= time )
+			{
+				window.clearInterval( timer );
+				el.style.left = x - startX + "px";
+				el.style.top = y - startY + "px";
+				console.log( el.style.left, el.style.top );
+			}
+		}, fps );
+	};
+
+	document.getElementById( "container" ).move( 500, 200, 1000 );
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习题</title>
+</head>
+<body>
+	<h2>1、將字符串“[1]nice [2]happy [3]good”分解成數組 [nice,happy,good]</h2>
+	<script>
+	var s = "[1]nice [2]happy [3]good";
+	var _a = s.split( /\s*\[\d\]/ );
+	_a.shift();
+	console.log( _a );
+	</script>
+
+	<h2>2、匹配网址：http://www.baidu.com/index.html</h2>
+	<script>
+	/*
+	 http://digi.163.com/16/0920/08/C1D3JGQG001680OS.html
+
+	 (http|https|ftp)://
+	 域名
+	 /(路径/)*
+	 (文件名.后缀名)?
+	 */
+	var rurl = /^(http|https|ftp):\/\/([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+(\.?[a-z]+)+(\/[^\/\.]+)*(\.\w+)*$/i;
+
+	console.log( "baidu:", rurl.test( "http://www.baidu.com/index.html" ) );
+	console.log( "163:", rurl.test( "http://digi.163.com/16/0920/08/C1D3JGQG001680OS.html" ) );
+	</script>
+
+	<h2>3、匹配邮箱：aosnow@yeah.net aosnow@qq.com aosnow@yahoo.com.cn，
+		用一个正则来描述以上3个邮箱地址</h2>
+	<script>
+	//yeah  .net
+	//qq  .com
+	//yahoo  (.com  .cn)
+
+	// 数字、字母、-，-不能连续使用，也不能在开头和结尾
+	var reg = /[a-z]\w+@[a-z0-9][a-z0-9\-]*[a-z0-9](\.[a-z]+)+/;
+	console.log( reg.test( "yeah.net" ) );
+	console.log( reg.test( "qq.net" ) );
+	console.log( reg.test( "yahoo.com.cn" ) );
+	</script>
+
+	<h2>4、使用面向对象设计一个简易的计算器类，需包含加减乘除、等号功能，
+		以及小数的计算
+		计算：(11+2.5)*100-10/2 的结果
+	</h2>
+	<script>
+	function Calc()
+	{
+		var _a = null;
+		var _b = null;
+		var _type = null;//0-加法，1-减法，2-乘法，3-除法
+
+		this.__defineSetter__( "a", function( value )
+		{
+			_a = value;
+		} );
+		this.__defineSetter__( "b", function( value )
+		{
+			_b = value;
+		} );
+
+		// 加法
+		this.add = function()
+		{
+			_type = 0;
+		};
+
+		// 减法
+		this.sub = function()
+		{
+			_type = 1;
+		};
+
+		// 乘法
+		this.multi = function()
+		{
+			_type = 2;
+		};
+
+		// 除法
+		this.div = function()
+		{
+			_type = 3;
+		};
+
+		// = 号，重复执行上一次的计算方式
+		this.equal = function()
+		{
+			// 必须设置一个数字及计算方式
+			if( _type == null || typeof _a != "number" )
+				return NaN;
+
+			// 若缺少数字就将这个数字与已经设置的数字相同
+			if( typeof _b != "number" ) _b = _a;
+
+			switch( _type )
+			{
+				case 0:
+				{
+					// switch 后面若没有任何需要执行的代码，可以
+					// 使用 return 来替代 break 跳出的作用
+					console.log( "a+b", _a, _b );
+					return _a = _a + _b;
+				}
+				case 1:
+				{
+					console.log( "a-b" );
+					return _a = _a - _b;
+				}
+				case 2:
+				{
+					console.log( "a*b", _a, _b );
+					return _a = _a * _b;
+				}
+				case 3:
+				{
+					console.log( "a/b" );
+					return _a = _a / _b;
+				}
+			}
+		};
+	}
+
+	var c = new Calc();
+
+	//(11+2.5)*100-10/2
+
+	c.a = 11;
+	c.b = 2.5;
+	c.add();
+	console.log( c.equal() );
+
+	c.b = 100;
+	c.multi();
+	console.log( c.equal() );
+
+	c.b = 5;
+	c.sub();
+	console.log( c.equal() );
+	console.log( c.equal() );
+	console.log( c.equal() );
+	</script>
+
+</body>
+</html>

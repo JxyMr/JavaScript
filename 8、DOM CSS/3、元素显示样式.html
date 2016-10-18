@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、元素显示样式</title>
+</head>
+<body>
+	<h2>显示和隐藏</h2>
+	<pre>
+		display
+		用来设置元素的显示类型：块元素（block）、内联元素（inline）、
+		列表项（list-item）等。
+		而设置为 none 时，元素将不再显示，并且不会"参与布局"
+		如：element.style.display = "none";
+
+
+		visibility
+		仅用来设置元素的显示和隐藏。
+		visible：元素显示
+		hidden：元素隐藏。隐藏后，元素所占用的位置不变，仍然影响布局。
+		如：element.style.visibility = "hidden";
+
+	</pre>
+
+
+	<h2>透明度</h2>
+	<pre>
+		背景透明
+		如：background-color: rgba(r0-255, g, b, 0-1小数);
+
+		元素透明
+		opacity: 0~1小数;
+		filter: alpha(opacity=0~100); /* IE 的兼容透明设置 */
+	</pre>
+
+</body>
+</html>

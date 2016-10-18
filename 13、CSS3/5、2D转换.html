@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5、2D转换</title>
+	<style>
+		._2d {
+			width: 200px;
+			height: 200px;
+			background-color: #6eb8db;
+			-webkit-transition: all 5s ease-in;
+			-moz-transition: all 5s ease-in;
+			-o-transition: all 5s ease-in;
+			transition: all 5s ease-in;
+		}
+		._2d:hover {
+			-webkit-transform: rotate(360deg);
+			-moz-transform: rotate(360deg);
+			-o-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	</style>
+</head>
+<body>
+	<h2>概述</h2>
+	<pre>
+		2D转换，3D转换，帧动画
+
+		2D转换是CSS3动画的核心基础，即让一个HTML元素转换到一个特定的状态（样式指定）。
+		而在这些状态之间进行切换，从而获得动画效果。
+
+		2D转换可以用来改变元素的 大小、位置和形状。
+
+		平移位置
+		translate(x,y)、translateX(n)、translateY(n)
+		单位像素（px），或者用百分比规定移动的数量
+
+
+		缩放大小
+		scale(x,y)、scaleX(n)、scaleY(n)
+		单位为倍数，1代表不变，2代表扩大到2倍，0.5代表缩小到一半
+
+		旋转角度
+		rotate(angle)
+		单位为角度（deg），旋转一周代表从0deg到360deg，负数代表逆时针旋转
+
+		倾斜角度xxxxxxx
+		skew(x-angle,y-angle)、skewX(deg)、skewY(deg)
+		单位也是角度（deg），与旋转类似，但是会发生形变
+	</pre>
+
+	<h2>过渡动画</h2>
+	<pre>
+		实际上就是在不同的各种设定好的“状态”之间进行切换，而要触发这些效果，
+		则需要“用户交互”或者“事件驱动”来启动过渡动画。
+
+		transition: width|all 2s linear;
+
+		transition-property: width|all;
+		transition-duration: 2s; // 动画持续的时间
+		transition-timing-function: linear; // linear、ease-in、ease-out
+		transition-delay: 2s; // 延迟多长时间才开始播放
+
+		动画过程中所涉及的单位：
+		大小、位置：像素（px）
+		旋转、倾斜：角度（deg）
+		时间：秒（s）、毫秒（ms）
+	</pre>
+
+	<div class="_2d"></div>
+
+</body>
+</html>

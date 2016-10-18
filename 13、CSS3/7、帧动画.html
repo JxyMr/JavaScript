@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7、帧动画</title>
+	<style>
+		@keyframes color-animate {
+			/*from { background: red; }*/
+			0% { background: red; }
+
+			50% { background: blue; }
+
+			/*to { background: green; }*/
+			100% { background: green; }
+		}
+
+		pre{
+			/*
+			animation: name 1s linear 2s infinite alternate;
+
+			animation-name: 动画名称
+			animation-duration: 动画持续时间
+			animation-timing-function: 过渡动画类型
+			animation-delay: 延迟执行时间
+			animation-iteration-count: 播放次数，infinte 代表无限次数
+			animation-direction: 是否反向过渡，alternate 反向
+			animation-fill-mode: 动画播放结束后的状态（可保持动画结束时的状态）
+			*/
+			-webkit-animation: color-animate 5s linear infinite alternate;
+			-o-animation: color-animate 5s linear infinite alternate;
+			animation: color-animate 5s linear infinite alternate;
+		}
+	</style>
+</head>
+<body>
+	<h2>概述</h2>
+	<pre>
+		与过渡动画不同，帧动画需要 @keyframes 来规定每帧的状态。
+		@keyframes 是创建和定义动画，并未能播放动画。
+		而要启动动画需要使用 animation 样式属性。
+	</pre>
+
+</body>
+</html>

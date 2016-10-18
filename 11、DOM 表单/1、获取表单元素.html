@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取表单元素</title>
+	<script src="../static/js/form.js"></script>
+</head>
+<body>
+	<form id="formRegister" action="http://www.baidu.com" method="post">
+
+		<div>
+			<input type="text" id="txtUserName" name="txtUserName" placeholder="用户名" value="初始名字">
+		</div>
+
+		<div>
+			<input type="password" id="txtPassWord" name="txtPassWord" placeholder="密码">
+		</div>
+
+		<div>
+			<select name="selHobby" id="selHobby">
+				<option value="运动">运动</option>
+				<option value="看书">看书</option>
+				<option value="游戏">游戏</option>
+			</select>
+		</div>
+
+		<div>
+			<textarea name="txtDesc" id="txtDesc" cols="30" rows="5"></textarea>
+		</div>
+
+		<div>
+			<!--单选框默认的 value="on"-->
+			<label><input type="radio" name="radSex" value="0"> 女</label>
+			<label><input type="radio" name="radSex" value="1"> 男</label>
+		</div>
+
+		<div>
+			<pre>
+				表单传输的数据，只能是字符串、数值、布尔类型。
+				对于复选框的取值，在取值阶段用数组存储，提交前转换成字符串。
+
+				转换成字符串有两种方案：
+				1、转换以逗号分隔的字符串（Array.join(",")）
+				2、将数组直接转换成JSON格式字符串，保留数据结构
+			</pre>
+
+			<div id="chkHobby">
+				<label><input type="checkbox" value="lol"> LOL</label>
+				<label><input type="checkbox" value="wow"> WOW</label>
+				<label><input type="checkbox" value="sport"> SPORT</label>
+			</div>
+
+		</div>
+
+		<!--form标签中的 button 的 type 默认为 submit-->
+		<button>立即提交</button>
+		<button type="button" onclick="printHandler()">打印数据</button>
+	</form>
+
+	<script>
+	var form = document.getElementById( "formRegister" );
+	var username = document.getElementById( "txtUserName" );
+	var password = document.getElementById( "txtPassWord" );
+	var hobby = document.getElementById( "selHobby" );
+	var desc = document.getElementById( "txtDesc" );
+
+	function printHandler()
+	{
+		//		console.log( "username:", username.value, username[ "value" ], username.getAttribute( "value" ) );
+		//		console.log( "password:", password.value );
+		//		console.log( "hobby:", hobby.value );
+		//		console.log( "desc:", desc.value );
+
+		// 单选组取值
+		// name=sex
+		var sex = document.getElementsByName( "radSex" );
+		console.log( sex[ 0 ].value, sex[ 1 ].value );
+		console.log( sex[ 0 ].checked, sex[ 1 ].checked );
+
+		//		var sexChecked = document.querySelector( "input[type='radio']:checked" );
+		//		console.log( sexChecked.value );
+
+		var checked = getRadioVal( "radSex" );
+		console.log( checked );
+
+		// 复选框取值
+		//		var c = document.getElementById( "chkHobby" );
+		//		var checkboxs = c.querySelectorAll( "input[type='checkbox']" );
+		//
+		//		console.log( checkboxs[ 0 ].value, checkboxs[ 1 ].value );
+		//		console.log( checkboxs[ 0 ].checked, checkboxs[ 1 ].checked );
+		var hobbys = getCheckbox( "chkHobby" );
+		console.log( hobbys );
+	}
+	</script>
+</body>
+</html>

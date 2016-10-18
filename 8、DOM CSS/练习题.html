@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习题</title>
+</head>
+<body>
+	<h2 class="a     b">
+		1、实现一个浮动DIV能够在页面刷新时，达到以下两种不同需求：
+		随机定位当前位置，不论如何定位都始终不出现滚动条
+	</h2>
+
+	<h2>
+		2、通过 element.className 的值对元素实现：
+		添加类 addClass
+		移除类 removeClass
+		是否包含指定类 hasClass
+		将这些功能扩展到 Element.prototype 原型上。
+	</h2>
+	<script>
+	Element.prototype.addClass = function( className )
+	{
+		var list = this.className.split( /\s+/ );
+
+		if( list.indexOf( className ) == -1 )
+		{
+			list.push( className );
+			this.className = list.join( " " );
+		}
+	};
+
+	Element.prototype.removeClass = function( className )
+	{
+		var list = this.className.split( /\s+/ );
+		var index = list.indexOf( className );
+
+		if( index != -1 )
+		{
+			list.splice( index, 1 );
+			this.className = list.join( " " );
+		}
+	};
+
+	Element.prototype.hasClass = function( className )
+	{
+		var list = this.className.split( /\s+/ );
+		return list.indexOf( className ) != -1;
+
+		// abc
+		// abc abc
+		// abc abc abc
+
+		// (^abc|\s+abc\s+|abc$)
+		//		var reg = new RegExp( "(^" + className + "|\s+" + className + "\s+|" + className + "$)", "" );
+		//		var r = reg.test( this.className );
+		//		reg = null;
+		//		return r;
+	};
+
+	var h2 = document.querySelector( "h2:first-child" );
+
+	h2.classList.add( "abc1" );
+	h2.classList.add( "abc2" );
+	h2.addClass( "abc3" );
+
+	console.log( h2.className );
+
+	//---------------------------------------------------
+
+	var startTime = new Date().getTime();
+
+	for( var i = 0; i < 1000; i++ )
+	{
+		h2.hasClass( "abc" );
+	}
+
+	console.log( "time:", new Date().getTime() - startTime );
+	</script>
+
+</body>
+</html>

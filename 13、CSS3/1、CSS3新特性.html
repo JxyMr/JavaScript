@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1、CSS3新特性</title>
+</head>
+<body>
+	<h2>CSS3概述</h2>
+	<pre>
+		CSS指CSS2.0，而CSS3是CSS的升级和扩展加强。
+		CSS3已经完全向后（下）兼容，浏览器始终支持CSS2.0。
+	</pre>
+
+	<h2>CSS3 新特性</h2>
+	<style>
+		/*
+		1、圆角边框
+		border-radius
+		*/
+		div.round {
+			height: 120px;
+			border:5px solid #43a9b0;
+			background-color: #6eb8db;
+			-webkit-border-radius: 50px;
+			-moz-border-radius: 50px;
+			border-radius: 50px;
+		}
+
+		div.round2{
+			border-top-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		div.round3{
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+		}
+	</style>
+
+	<div class="round"></div>
+	<div class="round round2"></div>
+	<div class="round round3"></div>
+
+
+
+</body>
+</html>

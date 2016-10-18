@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>案例</title>
+	<script src="../static/js/dom.js"></script>
+
+	<style>
+		.container {
+			width: 300px;
+			height: 300px;
+			border: 5px solid #333333;
+			background-color: #88d5d5;
+			position: absolute;
+			right: 100px;
+			top: calc(50% - 150px);
+		}
+		.a {
+			cursor: pointer;
+			border: 2px solid #333333;
+			background-color: #77cc77;
+			width: 100px;
+			height: 100px;
+			/*position: absolute;*/
+		}
+		.left01 { left: 100px; }
+		.left02 { left: 200px; }
+		.left03 { left: 300px; }
+	</style>
+</head>
+<body>
+	<div class="container"></div>
+
+	<div class="a" data-state="out">1</div>
+	<div class="a" data-state="out">2</div>
+	<div class="a" data-state="out">3</div>
+
+	<script>
+	/*
+	 click
+	 mousedown mouseup
+
+	 1、当 mousedown 按下时，开启拖动
+
+	 2、当 mousemove 时同时移动元素，指示最新的当前位置
+
+	 3、当 mouseup 时，检测当前鼠标位置是否在目标元素范围内
+	 在范围内：将拖动的元素加入到此目标容器中
+	 不在范围内：将拖动的元素返回原位
+	 */
+
+	var container = document.querySelector( ".container" );
+	var smaller = document.querySelectorAll( ".a" );
+
+	for( var i = 0; i < smaller.length; i++ )
+	{
+		var el = smaller[ i ];
+		el.addEventer( "mousedown", mousedownHandler );
+	}
+
+	window.addEventer( "mouseup", mouseupHandler );
+
+	var element = {};// {target:null, offsetX:0, OffsetY:0}
+	// offsetX,OffsetY: 鼠标当前坐标相对于元素左上角坐标的差值
+	// target: 当前移动的目标元素
+
+	function mousedownHandler( event )
+	{
+		// event.type 当前派发的事件类型
+		console.log( event.type );
+
+		// 设置定位，开启拖动
+		this.style.position = "fixed";
+		console.log( this.offsetLeft, this.offsetTop );
+
+		element.target = this;// event.currentTarget
+		element.offsetX = event.clientX - this.offsetLeft;
+		element.offsetY = event.clientY - this.offsetTop;
+		element.startX = this.offsetLeft;
+		element.startY = this.offsetTop;
+
+		window.addEventer( "mousemove", mousemoveHandler );
+	}
+
+	function mouseupHandler( event )
+	{
+		var x = container.offsetLeft;
+		var y = container.offsetTop;
+		var width = container.offsetWidth;
+		var height = container.offsetHeight;
+
+		// 当鼠标坐标大于或者等于左上角坐标，且小于等于右下角坐标，
+		// 则可判定该鼠标点在元素范围内
+		if( event.clientX >= x
+			&& event.clientY >= y
+			&& event.clientX <= x + width
+			&& event.clientY <= y + height )
+		{
+			// 鼠标进入范围
+			element.target.style.position = "static";
+			element.target.style.float = "left";
+			container.appendChild( element.target );
+
+			// 还原定位属性，便于拖出操作定位
+			element.target.style.left = "auto";
+			element.target.style.top = "auto";
+
+			// 修改状态
+			element.target.setAttribute( "data-state", "in" );
+		}
+		else
+		{
+			var state = element.target.getAttribute( "data-state" );
+
+			if( state == "in" )
+			{
+				// 拖出去
+				element.target.style.left = event.clientX - element.offsetX + "px";
+				element.target.style.top = event.clientY - element.offsetY + "px";
+				element.target.setAttribute( "data-state", "out" );
+			}
+			else
+			{
+				// 本来就在外面的，回到原位
+				// 给我滚回去
+				element.target.style.left = element.startX + "px";
+				element.target.style.top = element.startY + "px";
+			}
+		}
+
+		// 重置代理数据
+		element.target = null;
+		element.offsetX = 0;
+		element.offsetY = 0;
+
+		// 移除mousemove
+		window.removeEventer( "mousemove", mousemoveHandler );
+	}
+
+	function mousemoveHandler( event )
+	{
+		var x = event.clientX - element.offsetX;
+		var y = event.clientY - element.offsetY;
+
+		var el = element.target;
+		el.style.left = x + "px";
+		el.style.top = y + "px";
+	}
+	</script>
+</body>
+</html>

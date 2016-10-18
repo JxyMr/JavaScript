@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、阴影</title>
+
+	<style>
+		div {
+			min-height: 100px;
+			background-color: #88d5d5;
+			margin: 20px;
+		}
+		/*
+		盒阴影
+		box-shadow: [inset] hoffset voffset [blur] [spread] [color]
+
+		inset		加上此属性，代表设置为“内阴影”
+		h，v			横向偏移，纵向偏移
+		blur		阴影的模糊距离
+		spread		阴影扩大的距离
+		color		阴影颜色
+		*/
+		.box {
+			-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+			-moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+		}
+		.box2 {
+			-webkit-box-shadow: 0 0 0 1px #000000;
+			-moz-box-shadow: 0 0 0 1px #000000;
+			box-shadow: 0 0 0 1px #000000;
+		}
+		.text {
+			color: #ffffff;
+			text-shadow: 1px 1px 1px #000;
+		}
+		.text2 {
+			color: #b458ff;
+			background-color: #333;
+			font-family: "Microsoft YaHei", sans-serif;
+			font-size: 48px;
+			text-align: center;
+			line-height: 100px;
+			text-shadow: 0 0 0 1px #fff;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box2"></div>
+	<div class="text">
+		三英战吕布壁画“三英战吕布”是长篇历史小说《三国演义》中的一个故事情节，出自第五回“发矫诏诸镇应曹公
+		破关兵三英战吕布”。故事背景为曹操联合十八路诸侯讨伐董卓，上将吕布一连打败众将之后，刘备、关羽、张飞三兄弟在虎牢关与吕布大战的故事。见于《三国演义》第五回发矫诏诸镇应曹公
+		破关兵三英战吕布。“三英”指刘备（字玄德）、关羽（字云长）、张飞（字翼德）。
+	</div>
+
+	<div class="text2">
+		三英战吕布
+	</div>
+
+</body>
+</html>

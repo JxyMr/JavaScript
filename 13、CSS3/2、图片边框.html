@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、图片边框</title>
+	<style>
+		div {
+			border: 30px solid transparent;
+			width: 800px;
+			min-height: 200px;
+		}
+		.space {
+			-webkit-border-image: url(border2.png) 30 30 space;
+			-moz-border-image: url(border2.png) 30 30 space;
+			-o-border-image: url(border2.png) 30 30 space;
+			border-image: url(border2.png) 30 30 space;
+		}
+		.round {
+			-webkit-border-image: url(border2.png) 30 30 round;
+			-moz-border-image: url(border2.png) 30 30 round;
+			-o-border-image: url(border2.png) 30 30 round;
+			border-image: url(border2.png) 30 30 round;
+		}
+		.stretch {
+			-webkit-border-image: url(border2.png) 30 30 stretch;
+			-moz-border-image: url(border2.png) 30 30 stretch;
+			-o-border-image: url(border2.png) 30 30 stretch;
+			border-image: url(border2.png) 30 30 stretch;
+		}
+		.round2 {
+			border-width: 165px;
+			-webkit-border-image: url(border.png) 165 165 round;
+			-moz-border-image: url(border.png) 165 165 round;
+			-o-border-image: url(border.png) 165 165 round;
+			border-image: url(border.png) 165 165 round;
+		}
+	</style>
+</head>
+<body>
+	<div class="space"></div>
+	<div class="round"></div>
+	<div class="stretch"></div>
+	<div class="round2"></div>
+</body>
+</html>

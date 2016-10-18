@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3、AJAX概述</title>
+</head>
+<body>
+	<h2>介绍</h2>
+	<pre>
+		AJAX - 异步的JavaScript和XML
+		（Asynchronous JavaScript And XML）
+
+		是一种创建“交互式”网页应用的开发技术，虽然名字中有XML，但其并不限制传输
+		数据的类型，而且目前传输数据多以JSON结构为主，而并非笨重的XML。
+
+		“不刷新、不跳转”页面的情况下，通过服务器请求，“异步完成”更新页面中“某部分”
+		的内容的目的。
+
+		而传统的网页，如果需要更新内容，必须重载整个网页。
+
+		同步 - 顺序执行，必须执行一行代码后，再继续下一行（阻塞）
+		异步 - 开辟新的通道，和主线程同步运行，等到有结果返回再通过主线程处理
+				和利用该结果。
+	</pre>
+	<script>
+	console.log( "before...." );
+	alert( "come on!!" );
+	console.log( "after...." );
+	</script>
+
+	<h2>AJAX好处</h2>
+	<ol>
+		<li>相对于加载整个页面，数据量大大减少（无需各种标签和符合）</li>
+		<li>避免重复加载网页相同部分，如每个页面都有标题栏、导航、页脚，
+		加快响应速度</li>
+		<li>降低服务器请求负载，减少用户等待时间</li>
+	</ol>
+
+</body>
+</html>

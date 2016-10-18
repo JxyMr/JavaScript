@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2、遍历文档树</title>
+</head>
+<body>
+	<h2>Node 遍历</h2>
+	<pre>
+		节点属性访问：
+
+		* nodeType
+		节点的类型，1-Element，3-Text，8-Comment，9-Document，
+		11-DocumentFragment
+
+		* nodeValue
+		Text和Comment节点的文本内容
+
+		* nodeName
+		标签元素的标签名，返回结果是全大写的字母
+
+		-----------------------------------------------------
+
+		节点层级访问：
+
+		* parentNode
+		当前节点的父节点，若没有父节点返回 null，比如 Document 没有父节点
+
+		* childNodes
+		子节点列表数组（NodeList 类型的只读数组）
+
+		* firstChild、lastChild
+		子节点中的第一个和最后一个节点。子节点数量为0时返回null，只有1时两者相同
+
+		* nextSibling、previousSibling
+		具有同一个父节点，相邻节点中的前一个和后一个
+	</pre>
+
+	<h2>Element 遍历</h2>
+	<pre>
+		元素指的是DOM树中忽略“文本、注释、空白字符”后剩下的Element对象。
+
+		* firstElementChild、lastElementChild
+
+		* nextElementSibling、previousElementSibling
+
+		* childElementCount
+		子元素的数量（只能通过Element对象进行访问）
+	</pre>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5、JavaScript 数据类型（二）</title>
+	<style>
+		th, td {
+			border: 1px solid #333333;
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+<body>
+	<script>
+	var y = "yes";
+	var n = "no";
+	var s = "U are pig? answer: " + y + " .";
+
+	console.log( s );
+	</script>
+
+	<h2>值类型</h2>
+	<pre>Number、String、Boolean</pre>
+
+	<h2>引用类型</h2>
+	<p>引用类型的变量存储的是一个“内存地址”，这个地址对应其内容的在内存中的“位置编号”。</p>
+
+	<h2>Object - 对象类型</h2>
+	<pre>
+		浏览器的窗口对应 window 对象
+		整个网页的内容对应 document 对象
+		网页中的标签对应 Element 对象
+		以上这些对象统称为浏览器的“内置对象”
+
+		自定义对象 - 用来描述一组无序的数据集合
+
+		创建自定义对象：
+		---------------------------------------------------------
+		var obj = {};
+		该对象是一个空的对象，可以包含数据，这些数据被称为“键值对”或者“属性和属性值”，
+		多个数据之间用逗号隔开
+
+		var person = {age:32, sex:"boy"};
+		属性和属性值之间用冒号隔开，数据对之间用逗号隔开，“属性和值”必须成对出现
+
+		访问对象的属性：
+		---------------------------------------------------------
+		person.age == 32
+		person.sex == "boy"
+
+		person["age"] == 32
+		person["sex"] == "boy"
+
+		对象的动态特性：
+		---------------------------------------------------------
+		对象可以动态的添加属性和方法。
+
+		person.name = "王尼玛";
+		person["name"] = "王尼玛";
+
+		原理：若给不存在的属性赋值，会创建新的属性，再赋值。
+			若属性已经存在，则原来的值会被覆盖。
+	</pre>
+	<script>
+	var person = { age: 32, sex: "boy" };
+
+	console.log( person.age );
+	console.log( person[ "sex" ] );
+
+	person.age = 22;// 覆盖旧的值
+	person.name = "王尼玛";// 添加新属性，再赋值
+	console.log( person );
+	</script>
+
+	<h2>Array - 数组类型</h2>
+	<p>数组是用来存储一系列数据元素的有序容器。</p>
+	<pre>
+		* 数组每个元素的数据类型可以不同
+		* 访问数组元素时使用下标，下标从 0 开始
+		* 数组的长度对应内部元素的个数
+	</pre>
+
+	<h3>二维数组</h3>
+	<pre>
+		当使用数组作为数组的元素的时候，就成为二维数组。
+	</pre>
+	<script>
+	var ew = [
+		[ 1, 2, 3 ],
+		[ 4, 5, 6 ],
+		[ 7, 8, 9 ]
+	];
+	</script>
+
+	<script>
+	// 定义数组
+	var arr = [ 1, "2", true, 4, 5.5 ];// 初始值
+
+	// 访问数组长度
+	console.log( "length:", arr.length );
+
+	// 访问数组数据
+	console.log( arr[ 0 ] );
+	console.log( arr[ 2 ] );
+	console.log( arr[ arr.length - 1 ] );// 最后一个元素的下标
+	</script>
+
+	<h2>Function - 函数类型</h2>
+	<pre>
+		将多行代码集合起来，取名后达到“重复利用”的目的，称为函数。
+	</pre>
+	<script>
+
+	function log( a2 )
+	{
+		//		var a2 = [ 1, 2, 3 ];
+		console.log( a2[ 0 ] );
+		console.log( a2[ 1 ] );
+		console.log( a2[ 2 ] );
+	}
+
+	var a2 = [ 1, 2, 3 ];
+	//	console.log( a2[ 0 ] );
+	//	console.log( a2[ 1 ] );
+	//	console.log( a2[ 2 ] );
+	log( a2 );
+
+	var a3 = [ 4, 5, 6 ];
+	//	console.log( a3[ 0 ] );
+	//	console.log( a3[ 1 ] );
+	//	console.log( a3[ 2 ] );
+	log( a3 );
+
+	var a4 = [ 7, 8, 9 ];
+	//	console.log( a4[ 0 ] );
+	//	console.log( a4[ 1 ] );
+	//	console.log( a4[ 2 ] );
+	log( a4 );
+
+	</script>
+
+	<h2>特殊类型</h2>
+
+	<h2>Undefined - 未定义</h2>
+	<pre>
+		* 变量只声明不赋值，其值默认为 undefined。
+		* 当访问对象的属性不存在时，其值为 undefined。
+		* 访问函数时不传递参数，则函数内使用形参的值为 undefined。
+
+		undefined 不是保留关键字，则意味着其可以被赋值。
+		所以我们一般使用 void(0) 代替 undefined。
+	</pre>
+	<a href="javascript:void(0)">死链接-点击无效不跳转</a>
+	<script>
+	// Undefined - 类型
+	// undefined - 值
+	var a;
+	console.log( a, a == undefined );// undefined
+	console.log( typeof(a), typeof(a) == "undefined" );// "undefined"
+	</script>
+
+	<h2>Null - 空对象</h2>
+	<p>该类型不能用作标识符，代表“无值”或者“无对象”。</p>
+	<pre>
+		“空对象” - 指的是 Null 数据类型。var obj = null;
+		“空的对象” - 指的是无任何属性和方法的对象。var obj = {};
+
+		对于不需要再使用的引用类型数据，可以通过给一个 null 值来清除内容和释放内存。
+	</pre>
+
+	<h2>NaN - 非数字</h2>
+	<pre>
+		NaN - not a number，它不是一个数字
+	</pre>
+	<script>
+	console.log( typeof(NaN) );// "number"
+	console.log( typeof NaN );// "number"
+	</script>
+
+	<h2>typeof</h2>
+	<p>检测参数的数据类型</p>
+	<pre>
+		typeof 可以当成“运算符”和“函数”来使用。
+	</pre>
+	<table>
+		<thead>
+		<tr>
+			<th>描述</th>
+			<th>字符串结果</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>数值</td>
+			<td>"number"</td>
+		</tr>
+		<tr>
+			<td>字符串</td>
+			<td>"string"</td>
+		</tr>
+		<tr>
+			<td>布尔值</td>
+			<td>"boolean"</td>
+		</tr>
+		<tr>
+			<td>函数名</td>
+			<td>"function"</td>
+		</tr>
+		<tr>
+			<td>未定义变量、属性</td>
+			<td>"undefined"</td>
+		</tr>
+		<tr>
+			<td>对象、数组、Null</td>
+			<td>"object"</td>
+		</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
